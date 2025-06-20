@@ -285,6 +285,45 @@
             height: 380px;
             border: none;
         }
+.movie-embed-fake {
+  position: relative;
+  max-width: 400px;
+  margin: 30px auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.movie-embed-fake img {
+  width: 100%;
+  display: block;
+}
+
+.play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play-overlay a {
+  font-size: 2rem;
+  color: white;
+  background: #e75480;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.play-overlay a:hover {
+  background: #c2185b;
+}
 
         /* Movies Section */
         /* Movie cards container */
@@ -615,6 +654,12 @@
       <img src="https://occ-0-1432-1433.1.nflxso.net/art/85c7a/87bf37a146eb65b381d6b542327c73507e385c7a.jpg" alt="The Notebook Poster" />
       <div class="movie-title">The Notebook</div>
     </a>
+<div class="movie-embed-fake">
+  <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Notebook_movie.jpg" alt="The Notebook Poster" />
+  <div class="play-overlay">
+    <a href="https://vipstream.tv/watch-movie/watch-the-notebook-full-19489.11573473" target="_blank">▶ Watch Now</a>
+  </div>
+</div>
 
     <!-- Movie Card 2 -->
     <a href="https://www.netflix.com/watch/80095306" target="_blank" rel="noopener noreferrer" class="movie-card">
