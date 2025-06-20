@@ -513,9 +513,35 @@
                 padding: 60px 15px;
             }
         }
+        #music-toggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #ff6b8b;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+
+    #music-toggle:hover {
+      background-color: #e75480;
+    }
+
     </style>
 </head>
 <body>
+    <div id="music-toggle" title="Pause Music">
+    <i class="fas fa-volume-up"></i>
+  </div>
     <div class="main-container">
         <!-- Cover Section -->
         <section class="section cover-section" id="cover">
@@ -672,7 +698,20 @@
             }
             
             createHearts();
-            
+            const musicToggle = document.getElementById('music-toggle');
+              const music = document.getElementById('background-music');
+        
+              musicToggle.addEventListener('click', () => {
+                if (music.paused) {
+                  music.play();
+                  musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+                  musicToggle.title = "Pause Music";
+                } else {
+                  music.pause();
+                  musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                  musicToggle.title = "Play Music";
+                }
+              });
             // Smooth scroll to next section when button is clicked
             const showMeBtn = document.querySelector('.show-me-btn');
             if (showMeBtn) {
