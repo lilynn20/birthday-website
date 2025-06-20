@@ -48,13 +48,60 @@
 <body>
 
 <main>
-  <!-- Changed iframe src to example.com for demo -->
   <iframe
-    src="https://d9cc5779-43ed-448f-a4eb-44407ea6b337--1749924000--87ce7533.app.yourware.app"
+    style="width: 100vw; height: 100vh; border: none; display: block;"
+    srcdoc='
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8"/>
+        <title>Happy Birthday!</title>
+        <style>
+          body {
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #880e4f;
+            flex-direction: column;
+            text-align: center;
+          }
+          h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+          }
+          p {
+            font-size: 1.25rem;
+            max-width: 400px;
+            margin: 0 auto;
+          }
+          button {
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            background-color: #d6336c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+          button:hover {
+            background-color: #a5274b;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Happy Birthday, My Love! 🎉</h1>
+        <p>Click the button below to see your special letters and surprises.</p>
+        <button onclick="parent.location.href=\'#letters\'">Show Me 💌</button>
+      </body>
+      </html>
+    '
     allowfullscreen
     loading="eager"
-    sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation">
-  </iframe>
+  ></iframe>
 
   <div class="divider">💌 Scroll down for your letters and surprises 💌</div>
 
