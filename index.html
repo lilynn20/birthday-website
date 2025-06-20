@@ -417,6 +417,138 @@
             color: #ff6b8b;
         }
 
+        /* Friends Messages Section */
+        .friends-section {
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f0fa 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .message-board {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-board::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50px;
+            right: 50px;
+            height: 40px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #eee;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .message-board::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background-color: #f5f5f5;
+            border-top: 1px solid #eee;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .board-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e75480;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+        }
+
+        .board-subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .messages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .message-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            position: relative;
+            border: 1px solid #eee;
+        }
+
+        .message-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .message-screenshot {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+
+        .message-info {
+            padding: 15px;
+            background-color: #fff9fa;
+        }
+
+        .message-from {
+            font-weight: 600;
+            color: #e75480;
+            margin-bottom: 5px;
+        }
+
+        .message-preview {
+            font-size: 0.9rem;
+            color: #666;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .pin {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: #e75480;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .pin::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: #d1426f;
+            border-radius: 50%;
+        }
+
         /* Navigation */
         .page-nav {
             position: fixed;
@@ -518,6 +650,10 @@
             .netflix-embed iframe {
                 height: 200px;
             }
+
+            .messages-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 480px) {
@@ -539,6 +675,14 @@
             
             .section {
                 padding: 60px 15px;
+            }
+
+            .message-board {
+                padding: 20px 15px;
+            }
+
+            .board-title {
+                font-size: 2rem;
             }
         }
     </style>
@@ -678,6 +822,57 @@
   <p class="note">Note: You'll need to be logged into Netflix to view this content.</p>
 </section>
 
+        <!-- Friends Messages Section -->
+        <section class="section friends-section" id="friends">
+            <h1 class="section-title">Messages From Friends</h1>
+            <div class="message-board">
+                <div class="pin"></div>
+                <h2 class="board-title">Happy Birthday!</h2>
+                <p class="board-subtitle">Your friends wanted to share their love for you</p>
+                
+                <div class="messages-grid">
+                    <!-- Message 1 -->
+                    <div class="message-item">
+                        <div class="pin"></div>
+                        <img src="https://via.placeholder.com/300x400/e75480/ffffff?text=Message+from+Sarah" alt="Message from Sarah" class="message-screenshot">
+                        <div class="message-info">
+                            <div class="message-from">Sarah</div>
+                            <div class="message-preview">Happy birthday to the most amazing person I know! Can't wait to celebrate with you...</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Message 2 -->
+                    <div class="message-item">
+                        <div class="pin"></div>
+                        <img src="https://via.placeholder.com/300x400/e75480/ffffff?text=Message+from+Mike" alt="Message from Mike" class="message-screenshot">
+                        <div class="message-info">
+                            <div class="message-from">Mike</div>
+                            <div class="message-preview">Happy birthday bro! You're getting old but still looking young. Let's party soon!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Message 3 -->
+                    <div class="message-item">
+                        <div class="pin"></div>
+                        <img src="https://via.placeholder.com/300x400/e75480/ffffff?text=Message+from+Emily" alt="Message from Emily" class="message-screenshot">
+                        <div class="message-info">
+                            <div class="message-from">Emily</div>
+                            <div class="message-preview">To my favorite person on your special day! Wishing you all the happiness in the world...</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Message 4 -->
+                    <div class="message-item">
+                        <div class="pin"></div>
+                        <img src="https://via.placeholder.com/300x400/e75480/ffffff?text=Message+from+Alex" alt="Message from Alex" class="message-screenshot">
+                        <div class="message-info">
+                            <div class="message-from">Alex</div>
+                            <div class="message-preview">Happy birthday! Remember that crazy trip we took last year? Let's do it again!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </div>
 
@@ -687,6 +882,7 @@
         <a href="#letters" class="nav-link"><i class="fas fa-envelope"></i></a>
         <a href="#playlist" class="nav-link"><i class="fas fa-music"></i></a>
         <a href="#movies" class="nav-link"><i class="fas fa-film"></i></a>
+        <a href="#friends" class="nav-link"><i class="fas fa-users"></i></a>
     </nav>
 
     <script>
