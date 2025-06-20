@@ -450,6 +450,34 @@
             transform: scale(1.1);
         }
 
+        /* Music Player Controls */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e75480;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+
+        .music-control:hover {
+            background-color: #d1426f;
+            transform: scale(1.1);
+        }
+
+        .music-control i {
+            font-size: 1.2rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .cover-section h1 {
@@ -513,38 +541,20 @@
                 padding: 60px 15px;
             }
         }
-        #music-toggle {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      width: 50px;
-      height: 50px;
-      background-color: #ff6b8b;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      cursor: pointer;
-      z-index: 999;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: background 0.3s ease;
-    }
-
-    #music-toggle:hover {
-      background-color: #e75480;
-    }
-
     </style>
 </head>
 <body>
-    <audio id="background-music" autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-hearty.mp3" type="audio/mp3">
-</audio>
-    <div id="music-toggle" title="Pause Music">
-    <i class="fas fa-volume-up"></i>
-  </div>
+    <!-- Hidden audio element for background music -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music control button -->
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+    </div>
+
     <div class="main-container">
         <!-- Cover Section -->
         <section class="section cover-section" id="cover">
@@ -701,20 +711,7 @@
             }
             
             createHearts();
-            const musicToggle = document.getElementById('music-toggle');
-              const music = document.getElementById('background-music');
-        
-              musicToggle.addEventListener('click', () => {
-                if (music.paused) {
-                  music.play();
-                  musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-                  musicToggle.title = "Pause Music";
-                } else {
-                  music.pause();
-                  musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                  musicToggle.title = "Play Music";
-                }
-              });
+            
             // Smooth scroll to next section when button is clicked
             const showMeBtn = document.querySelector('.show-me-btn');
             if (showMeBtn) {
@@ -796,6 +793,40 @@
                         behavior: 'smooth'
                     });
                 });
+            });
+            
+            // Music control functionality
+            const bgMusic = document.getElementById('bgMusic');
+            const musicControl = document.getElementById('musicControl');
+            let isPlaying = false;
+            
+            // Try to autoplay (may be blocked by browser)
+            bgMusic.volume = 0.3; // Set lower volume
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // Autoplay started
+                    isPlaying = true;
+                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+                })
+                .catch(error => {
+                    // Autoplay was prevented
+                    isPlaying = false;
+                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
+                });
+            }
+            
+            // Toggle play/pause on click
+            musicControl.addEventListener('click', function() {
+                if (isPlaying) {
+                    bgMusic.pause();
+                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
+                } else {
+                    bgMusic.play();
+                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+                isPlaying = !isPlaying;
             });
         });
     </script>
