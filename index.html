@@ -4,8 +4,453 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday, My Love</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Modern, spacious cover section */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .main-container {
+            width: 100%;
+        }
+
+        .section {
+            min-height: 100vh;
+            width: 100%;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffd6de 100%);
+        }
+
+        .cover-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 70vh;
+            z-index: 2;
+        }
+
+        .birthday-message {
+            animation: fadeIn 1.5s ease-out;
+            margin-top: 10vh;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #e75480;
+            margin: 0;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cover-section h1 {
+            font-size: 4.5rem;
+            margin-bottom: 0;
+        }
+
+        .cover-section h2 {
+            font-size: 3.5rem;
+            margin-top: 0;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-top: 25px;
+            color: #555;
+            font-weight: 300;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .scroll-prompt {
+            margin-bottom: 10vh;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .scroll-prompt p {
+            font-size: 1.1rem;
+            color: #777;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .show-me-btn {
+            background-color: #e75480;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 84, 128, 0.3);
+        }
+
+        .show-me-btn:hover {
+            background-color: #d1426f;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 84, 128, 0.4);
+        }
+
+        .show-me-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .show-me-btn:hover i {
+            transform: translateY(3px);
+        }
+
+        /* Floating hearts */
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(231, 84, 128, 0.6);
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Letters Section */
+        .letters-section {
+            background-color: #fff9fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #e75480;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .envelopes-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .envelope {
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .envelope-front {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            color: #e75480;
+            transition: all 0.3s;
+            border-left: 5px solid #ff6b8b;
+        }
+
+        .envelope-front i {
+            font-size: 1.5rem;
+            color: #ff6b8b;
+        }
+
+        .letter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff9f2;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: rotateX(90deg);
+            transform-origin: top;
+            transition: transform 0.5s;
+            z-index: 10;
+            display: none;
+            border-top: 5px solid #ff6b8b;
+        }
+
+        .letter.open {
+            display: block;
+            transform: rotateX(0deg);
+        }
+
+        .letter-content {
+            padding: 10px;
+        }
+
+        .letter p {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .letter button {
+            margin-top: 20px;
+            background-color: #e75480;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .letter button:hover {
+            background-color: #ff2d42;
+        }
+
+        /* Playlist Section */
+        .playlist-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .spotify-embed {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .spotify-embed iframe {
+            width: 100%;
+            height: 380px;
+            border: none;
+        }
+
+        /* Movies Section */
+        .movies-section {
+            background-color: #fff9fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .netflix-embed {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .netflix-embed iframe {
+            width: 100%;
+            height: 280px;
+            border: none;
+        }
+
+        .note {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .movie-suggestions {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 30px auto 0;
+        }
+
+        .movie-suggestions h3 {
+            color: #e75480;
+            margin-bottom: 15px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .movie-suggestions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .movie-suggestions li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .movie-suggestions li:last-child {
+            border-bottom: none;
+        }
+
+        .movie-suggestions li i {
+            color: #ff6b8b;
+        }
+
+        /* Navigation */
+        .page-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ff6b8b;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: #ff6b8b;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cover-section h1 {
+                font-size: 3.5rem;
+            }
+            
+            .cover-section h2 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .show-me-btn {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .page-nav {
+                right: 10px;
+            }
+            
+            .nav-link {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .spotify-embed iframe {
+                height: 300px;
+            }
+            
+            .netflix-embed iframe {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cover-section h1 {
+                font-size: 2.8rem;
+            }
+            
+            .cover-section h2 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .scroll-prompt p {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 60px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="main-container">
@@ -30,89 +475,207 @@
             </div>
         </section>
 
-        <!-- Rest of your sections (letters, playlist, movies) go here -->
-        <!-- ... -->
-
-        <!-- Open When Letters Section -->
-        <section class="section" id="letters">
-            <h1>Open When Letters</h1>
+        <!-- Letters Section -->
+        <section class="section letters-section" id="letters">
+            <h1 class="section-title">Open When Letters</h1>
             <div class="envelopes-container">
-                <div class="envelope" onclick="openLetter('letter1')">
-                    <div class="envelope-front">Open when you miss me</div>
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you miss me</span>
+                    </div>
                     <div class="letter" id="letter1">
-                        <p>My Dearest,</p>
-                        <p>I know we're apart right now, but please know that I'm thinking of you every moment. Remember our last date at the park? How we laughed until our stomachs hurt? That's the joy you bring to my life.</p>
-                        <p>I miss you terribly, but this distance is temporary. Soon we'll be in each other's arms again.</p>
-                        <p>All my love,</p>
-                        <p>Me</p>
-                        <button onclick="closeLetter('letter1')">Close</button>
+                        <div class="letter-content">
+                            <p>My Dearest,</p>
+                            <p>I know we're apart right now, but please know that I'm thinking of you every moment. Remember our last date at the park? How we laughed until our stomachs hurt? That's the joy you bring to my life.</p>
+                            <p>I miss you terribly, but this distance is temporary. Soon we'll be in each other's arms again.</p>
+                            <p>All my love,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter1')"><i class="fas fa-times"></i> Close</button>
                     </div>
                 </div>
                 
-                <div class="envelope" onclick="openLetter('letter2')">
-                    <div class="envelope-front">Open when you're sad</div>
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you're sad</span>
+                    </div>
                     <div class="letter" id="letter2">
-                        <p>My Love,</p>
-                        <p>I wish I could be there to wipe away your tears and hold you tight. Remember that whatever is making you sad will pass, and I'll be here to support you through it all.</p>
-                        <p>Think of your favorite memory of us - that time we got caught in the rain and danced anyway. That's the spirit I love about you!</p>
-                        <p>You're stronger than you think.</p>
-                        <p>Forever yours,</p>
-                        <p>Me</p>
-                        <button onclick="closeLetter('letter2')">Close</button>
+                        <div class="letter-content">
+                            <p>My Love,</p>
+                            <p>I wish I could be there to wipe away your tears and hold you tight. Remember that whatever is making you sad will pass, and I'll be here to support you through it all.</p>
+                            <p>Think of your favorite memory of us - that time we got caught in the rain and danced anyway. That's the spirit I love about you!</p>
+                            <p>You're stronger than you think.</p>
+                            <p>Forever yours,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter2')"><i class="fas fa-times"></i> Close</button>
                     </div>
                 </div>
                 
-                <div class="envelope" onclick="openLetter('letter3')">
-                    <div class="envelope-front">Open when you can't sleep</div>
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you can't sleep</span>
+                    </div>
                     <div class="letter" id="letter3">
-                        <p>Sweet Dreams,</p>
-                        <p>Can't sleep? Let me tell you a story about us. Remember our first date? I was so nervous I spilled my drink, but you just laughed and said it made me more human.</p>
-                        <p>Now imagine I'm there beside you, holding you close. Feel my arms around you, hear my heartbeat. You're safe, you're loved, and soon you'll drift off to sleep.</p>
-                        <p>Goodnight, my love.</p>
-                        <p>Always,</p>
-                        <p>Me</p>
-                        <button onclick="closeLetter('letter3')">Close</button>
+                        <div class="letter-content">
+                            <p>Sweet Dreams,</p>
+                            <p>Can't sleep? Let me tell you a story about us. Remember our first date? I was so nervous I spilled my drink, but you just laughed and said it made me more human.</p>
+                            <p>Now imagine I'm there beside you, holding you close. Feel my arms around you, hear my heartbeat. You're safe, you're loved, and soon you'll drift off to sleep.</p>
+                            <p>Goodnight, my love.</p>
+                            <p>Always,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter3')"><i class="fas fa-times"></i> Close</button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Playlist Section -->
-        <section class="section" id="playlist">
-            <h1>Our Playlist</h1>
+        <section class="section playlist-section" id="playlist">
+            <h1 class="section-title">Our Playlist</h1>
             <div class="spotify-embed">
-                <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4Wsb4d7NKfP" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4Wsb4d7NKfP" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
         </section>
 
         <!-- Movies Section -->
-        <section class="section" id="movies">
-            <h1>Movies to Watch</h1>
+        <section class="section movies-section" id="movies">
+            <h1 class="section-title">Movies to Watch</h1>
             <div class="netflix-embed">
-                <iframe src="https://www.netflix.com/watch/80234304?trackId=255824129" width="300" height="200" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.netflix.com/watch/80234304?trackId=255824129" frameborder="0" allowfullscreen></iframe>
                 <p class="note">Note: You'll need to be logged into Netflix to view this content</p>
             </div>
             <div class="movie-suggestions">
                 <h3>Our Movie Recommendations:</h3>
                 <ul>
-                    <li>The Notebook</li>
-                    <li>La La Land</li>
-                    <li>Before Sunrise</li>
-                    <li>Eternal Sunshine of the Spotless Mind</li>
+                    <li><i class="fas fa-heart"></i> The Notebook</li>
+                    <li><i class="fas fa-heart"></i> La La Land</li>
+                    <li><i class="fas fa-heart"></i> Before Sunrise</li>
+                    <li><i class="fas fa-heart"></i> Eternal Sunshine of the Spotless Mind</li>
                 </ul>
             </div>
         </section>
     </div>
 
-    <!-- Navigation Dots -->
-    <div class="nav-dots">
-    <a href="#cover" class="nav-dot active"></a>
-    <a href="#letters" class="nav-dot"></a>
-    <a href="#playlist" class="nav-dot"></a>
-    <a href="#movies" class="nav-dot"></a>
-</div>
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <a href="#cover" class="nav-link active"><i class="fas fa-home"></i></a>
+        <a href="#letters" class="nav-link"><i class="fas fa-envelope"></i></a>
+        <a href="#playlist" class="nav-link"><i class="fas fa-music"></i></a>
+        <a href="#movies" class="nav-link"><i class="fas fa-film"></i></a>
+    </nav>
 
-
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create floating hearts
+            function createHearts() {
+                const heartsContainer = document.querySelector('.floating-hearts');
+                const heartCount = 12;
+                
+                for (let i = 0; i < heartCount; i++) {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '<i class="fas fa-heart"></i>';
+                    
+                    // Random position and animation
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.fontSize = `${15 + Math.random() * 25}px`;
+                    heart.style.animationDuration = `${10 + Math.random() * 15}s`;
+                    heart.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    heartsContainer.appendChild(heart);
+                }
+            }
+            
+            createHearts();
+            
+            // Smooth scroll to next section when button is clicked
+            const showMeBtn = document.querySelector('.show-me-btn');
+            if (showMeBtn) {
+                showMeBtn.addEventListener('click', function() {
+                    const nextSection = document.querySelector('#letters');
+                    if (nextSection) {
+                        window.scrollTo({
+                            top: nextSection.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+            
+            // Letter functionality
+            function openLetter(letterId) {
+                // Close any other open letters first
+                document.querySelectorAll('.letter').forEach(letter => {
+                    if (letter.id !== letterId && letter.classList.contains('open')) {
+                        letter.classList.remove('open');
+                    }
+                });
+                
+                // Open the selected letter
+                const letter = document.getElementById(letterId);
+                letter.classList.toggle('open');
+            }
+            
+            function closeLetter(letterId) {
+                document.getElementById(letterId).classList.remove('open');
+            }
+            
+            // Attach event listeners to envelopes
+            document.querySelectorAll('.envelope').forEach(envelope => {
+                envelope.addEventListener('click', function() {
+                    const letter = this.querySelector('.letter');
+                    if (letter) {
+                        openLetter(letter.id);
+                    }
+                });
+            });
+            
+            // Update active navigation link based on scroll position
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            function updateActiveNav() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveNav);
+            updateActiveNav(); // Initialize
+            
+            // Smooth scroll for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
