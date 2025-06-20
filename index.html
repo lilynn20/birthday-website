@@ -6,36 +6,72 @@
   <title>Happy Birthday, My Love</title>
   <style>
     html, body {
-      margin: 0; padding: 0; height: 100%; font-family: 'Segoe UI', sans-serif;
-      background: #fff0f5; color: #333; scroll-behavior: smooth;
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff0f5;
+      color: #333;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
-    
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("https://www.transparenttextures.com/patterns/hearts.png");
+      opacity: 0.2;
+      z-index: -1;
+    }
+
     main {
       margin-top: 60px;
     }
+
     iframe {
       width: 100vw;
       height: 100vh;
       border: none;
       display: block;
     }
+
     .divider {
-      text-align: center; margin: 40px 0 20px; color: #888;
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #888;
     }
+
     .section {
-      max-width: 800px; margin: 0 auto 60px; padding: 0 20px 40px;
+      max-width: 800px;
+      margin: 0 auto 60px;
+      padding: 0 20px 40px;
     }
+
     .card {
-      background: white; border-radius: 12px; padding: 25px 30px;
+      background: white;
+      border-radius: 12px;
+      padding: 25px 30px;
       box-shadow: 0 6px 15px rgba(0,0,0,0.12);
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
+
     h2 {
-      margin-top: 0; color: #d6336c;
+      margin-top: 0;
+      color: #d6336c;
     }
+
+    h3 {
+      margin-top: 0;
+      color: #c2185b;
+    }
+
     footer {
-      text-align: center; padding: 20px; font-size: 0.9rem;
-      color: #777; border-top: 1px solid #f4c4d4;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid #f4c4d4;
       user-select: none;
     }
   </style>
@@ -53,8 +89,11 @@
         <title>Happy Birthday!</title>
         <style>
           body {
-            margin: 0; padding: 0;
-            display: flex; justify-content: center; align-items: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
             background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -89,7 +128,7 @@
       </head>
       <body>
         <h1>Happy Birthday, My Love! 🎉</h1>
-        <p>Click the button below to see your special letters and surprises.</p>
+        <p>Scroll down to see your special letters and surprises.</p>
         <button onclick="parent.location.href=\'#letters\'">Show Me 💌</button>
       </body>
       </html>
@@ -98,14 +137,24 @@
     loading="eager"
   ></iframe>
 
-  <div class="divider">💌 Scroll down for your letters and surprises 💌</div>
+  <div class="divider" id="letters">💌 Scroll down for your letters and surprises 💌</div>
 
   <section class="section">
+    <h2 style="text-align: center;">Open When Letters 💖</h2>
+
     <div class="card">
-      <h2>Open When Letters</h2>
-      <p><strong>Open when you miss me:</strong><br>I miss you too. Even from far away, I'm always with you in spirit, in love, in everything.</p>
-      <p><strong>Open when you're sad:</strong><br>You don’t have to smile all the time. It’s okay to feel down — I’m here for you, always. I believe in you.</p>
-      <p><strong>Open when you can’t sleep:</strong><br>Close your eyes and think of us. Breathe in, breathe out. I’m hugging you from here.</p>
+      <h3>Open when you miss me</h3>
+      <p>I miss you too. Even from far away, I'm always with you in spirit, in love, in everything.</p>
+    </div>
+
+    <div class="card">
+      <h3>Open when you're sad</h3>
+      <p>You don’t have to smile all the time. It’s okay to feel down — I’m here for you, always. I believe in you.</p>
+    </div>
+
+    <div class="card">
+      <h3>Open when you can’t sleep</h3>
+      <p>Close your eyes and think of us. Breathe in, breathe out. I’m hugging you from here.</p>
     </div>
 
     <div class="card">
