@@ -2,115 +2,234 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Happy Birthday, My Love</title>
   <meta name="description" content="A fullscreen birthday greeting with letters, music, and memories." />
   <style>
+    /* Reset and base styles */
+    * {
+      box-sizing: border-box;
+    }
     html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
+      margin: 0; padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #fff0f5;
       color: #333;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Fixed header */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #d6336c;
+      color: white;
+      text-align: center;
+      padding: 15px 20px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(214, 51, 108, 0.3);
+    }
+
+    /* Container for iframe and rest */
+    main {
+      margin-top: 60px; /* space for fixed header */
+      flex-grow: 1;
+    }
+
+    /* Full viewport iframe */
     iframe.top-frame {
       width: 100vw;
-      height: 100vh; /* Changed from 90vh to 100vh */
+      height: calc(100vh - 60px); /* full screen minus header */
       border: none;
       display: block;
+      pointer-events: auto;
     }
 
-    .section {
-      padding: 60px 20px;
+    /* Scroll prompt */
+    .divider {
+      text-align: center;
+      font-size: 1.2rem;
+      margin: 40px 0 20px;
+      color: #888;
+      user-select: none;
+    }
+
+    /* Section for letters and cards */
+    section.section {
+      padding: 0 20px 40px;
       max-width: 800px;
-      margin: 0 auto;
+      margin: 0 auto 60px;
     }
 
+    /* Cards styling */
     .card {
       background: white;
       border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
+      padding: 25px 30px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h2 {
       margin-top: 0;
       color: #d6336c;
+      font-weight: 700;
+      letter-spacing: 0.03em;
     }
 
     .letter {
       white-space: pre-wrap;
-      font-size: 1rem;
-      line-height: 1.5;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #555;
     }
 
+    /* Spotify iframe */
+    iframe.spotify {
+      height: 380px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(214, 51, 108, 0.3);
+    }
+
+    /* Images */
+    .photo-memories img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 15px rgba(214, 51, 108, 0.15);
+      object-fit: cover;
+    }
+
+    /* Secret message */
+    .secret {
+      background-color: #ffe4e1;
+      padding: 20px;
+      border-radius: 12px;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #a83252;
+      box-shadow: inset 0 0 8px #d6336c44;
+    }
+
+    /* Footer */
     footer {
       text-align: center;
       padding: 20px;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #777;
+      border-top: 1px solid #f4c4d4;
+      margin-top: auto;
+      user-select: none;
     }
 
-    .divider {
-      text-align: center;
-      font-size: 1.2rem;
-      margin: 40px 0;
-      color: #888;
+    /* Responsive tweaks */
+    @media (max-width: 480px) {
+      .card {
+        padding: 20px 15px;
+      }
+      header {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <iframe
-    class="top-frame"
-    src="https://d9cc5779-43ed-448f-a4eb-44407ea6b337--1749924000--87ce7533.app.yourware.app"
-    allowfullscreen
-    loading="eager"
-    sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation">
-  </iframe>
 
-  <div class="divider">💌 Scroll down for your letters and surprises 💌</div>
+  <header>Happy Birthday, My Love 💖</header>
 
-  <section class="section">
-    <div class="card">
-      <h2>Open When Letters</h2>
-      <div class="letter">
-        <strong>Open when you miss me:</strong>
-        <p>I miss you too. Even from far away, I'm always with you in spirit, in love, in everything.</p>
+  <main>
+    <iframe
+      class="top-frame"
+      src="https://d9cc5779-43ed-448f-a4eb-44407ea6b337--1749924000--87ce7533.app.yourware.app"
+      allowfullscreen
+      loading="eager"
+      sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation"
+      ></iframe>
 
-        <strong>Open when you're sad:</strong>
-        <p>You don’t have to smile all the time. It’s okay to feel down — I’m here for you, always. I believe in you.</p>
+    <div class="divider">💌 Scroll down for your letters and surprises 💌</div>
 
-        <strong>Open when you can’t sleep:</strong>
-        <p>Close your eyes and think of us. Breathe in, breathe out. I’m hugging you from here.</p>
+    <section class="section">
+      <div class="card">
+        <h2>Open When Letters</h2>
+        <div class="letter">
+          <strong>Open when you miss me:</strong>
+          <p>I miss you too. Even from far away, I'm always with you in spirit, in love, in everything.</p>
+
+          <strong>Open when you're sad:</strong>
+          <p>You don’t have to smile all the time. It’s okay to feel down — I’m here for you, always. I believe in you.</p>
+
+          <strong>Open when you can’t sleep:</strong>
+          <p>Close your eyes and think of us. Breathe in, breathe out. I’m hugging you from here.</p>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <h2>Our Playlist 🎧</h2>
-      <iframe style="height: 380px; width: 100%; border: none; border-radius: 8px;" src="https://open.spotify.com/embed/playlist/your-playlist-id" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-      <p style="text-align: center; font-style: italic; margin-top: 10px;">(Replace this with your actual Spotify playlist)</p>
-    </div>
+      <div class="card">
+        <h2>Our Playlist 🎧</h2>
+        <iframe
+          class="spotify"
+          src="https://open.spotify.com/embed/playlist/your-playlist-id"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+        </iframe>
+        <p style="text-align: center; font-style: italic; margin-top: 10px;">(Replace this with your actual Spotify playlist)</p>
+      </div>
 
-    <div class="card">
-      <h2>Photo Memories 📸</h2>
-      <img src="your-image-link.jpg" alt="Memory 1" style="width: 100%; border-radius: 10px; margin-bottom: 10px;">
-      <img src="your-image-link-2.jpg" alt="Memory 2" style="width: 100%; border-radius: 10px;">
-      <p style="text-align: center; font-style: italic; margin-top: 10px;">(Replace with your own photos)</p>
-    </div>
+      <div class="card photo-memories">
+        <h2>Photo Memories 📸</h2>
+        <img src="your-image-link.jpg" alt="Memory 1" />
+        <img src="your-image-link-2.jpg" alt="Memory 2" />
+        <p style="text-align: center; font-style: italic; margin-top: 10px;">(Replace with your own photos)</p>
+      </div>
 
-    <div class="card">
-      <h2>A Secret Just for You 🎁</h2>
-      <p style="background-color: #ffe4e1; padding: 15px; border-radius: 8px; font-style: italic;">
-        You are the most beautiful part of my life. Thank you for being mine. Happy Birthday, my love 💖
-      </p>
-    </div>
-  </section>
+      <div class="card">
+        <h2>A Secret Just for You 🎁</h2>
+        <p class="secret">
+          You are the most beautiful part of my life. Thank you for being mine. Happy Birthday, my love 💖
+        </p>
+      </div>
+    </section>
+  </main>
 
   <footer>
     Made with so much love by your girl 💕
   </footer>
+
+  <script>
+    // Fade-in cards on scroll
+    function onScrollFade() {
+      const cards = document.querySelectorAll('.card');
+      const windowBottom = window.innerHeight + window.scrollY;
+
+      cards.forEach(card => {
+        const cardTop = card.offsetTop + 50; // slightly earlier
+        if (windowBottom > cardTop) {
+          card.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', onScrollFade);
+    window.addEventListener('load', onScrollFade);
+  </script>
+
 </body>
 </html>
