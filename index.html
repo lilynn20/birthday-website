@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Happy Birthday, My Love</title>
   <style>
+    /* Basic resets & layout */
     html, body {
       margin: 0;
       padding: 0;
@@ -14,42 +15,39 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid #f4c4d4;
+      user-select: none;
+    }
+    h2.divider {
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #888;
+      font-size: 1.5rem;
+    }
 
-    /* Floating red hearts background */
-    body::before {
-      content: "";
+    /* Floating background hearts & petals */
+    .particles {
       position: fixed;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      background: radial-gradient(red 1px, transparent 1px),
-                  radial-gradient(red 1px, transparent 1px);
-      background-size: 20px 20px;
-      background-position: 0 0, 10px 10px;
-      opacity: 0.15;
-    }
-
-    .hearts-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
+      width: 100%; height: 100%;
       overflow: hidden;
+      pointer-events: none;
       z-index: -1;
     }
-
-    .heart {
+    .heart, .petal {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 20px; height: 20px;
+      opacity: 0;
+    }
+    .heart {
       background-color: red;
       transform: rotate(45deg);
-      animation: floatHearts 10s linear infinite;
     }
-
     .heart::before, .heart::after {
       content: '';
       position: absolute;
@@ -58,78 +56,54 @@
       background-color: red;
       border-radius: 50%;
     }
-
-    .heart::before {
-      top: -10px;
-      left: 0;
+    .heart::before { top: -10px; left: 0; }
+    .heart::after  { left: -10px; top: 0; }
+    .petal {
+      background-color: #ffc0cb;
+      border-radius: 50%;
+      width: 10px; height: 15px;
     }
 
-    .heart::after {
-      left: -10px;
-      top: 0;
+    /* Populating CSS animations */
+    @keyframes drift {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
 
-    @keyframes floatHearts {
-      0% {
-        transform: translateY(100vh) scale(1) rotate(45deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) scale(1.2) rotate(45deg);
-        opacity: 0;
-      }
-    }
-
-    main {
-      margin-top: 60px;
-    }
-
-    iframe {
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      display: block;
-    }
-
-    .divider {
-      text-align: center;
-      margin: 40px 0 20px;
-      color: #888;
-    }
-
-    .section {
-      max-width: 800px;
-      margin: 0 auto 60px;
-      padding: 0 20px;
-    }
-
+    /* Envelope card structure */
     .envelope {
       background: #fff;
       border-radius: 8px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      margin: 20px 0;
       overflow: hidden;
-      transition: max-height 0.6s ease;
-    }
-
-    .envelope-header {
-      padding: 20px;
-      background: #d6336c;
-      color: #fff;
-      font-weight: bold;
-      font-size: 1.1rem;
-      text-align: left;
       cursor: pointer;
+      position: relative;
+      transition: transform 0.3s;
+    }
+    .envelope:hover {
+      transform: translateY(-5px) scale(1.01);
+    }
+    .envelope-header {
+      position: relative;
+      padding: 20px;
       display: flex;
       align-items: center;
+      background: #d6336c;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
     }
-
     .envelope-header::before {
       content: "✉️";
       margin-right: 10px;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
+      transition: transform 0.3s;
     }
-
+    .envelope:hover .envelope-header::before {
+      transform: rotate(20deg);
+    }
     .envelope-content {
       background: #fff0f5;
       padding: 0 20px;
@@ -139,189 +113,203 @@
       font-style: italic;
       line-height: 1.6;
       color: #333;
+      position: relative;
     }
-
     .envelope.open .envelope-content {
+      max-height: 250px;
       padding: 20px;
-      max-height: 300px;
+    }
+    /* Flap animation */
+    .flap {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 0;
+      border-bottom: 60px solid #d6336c;
+      border-left: 50% solid transparent;
+      border-right: 50% solid transparent;
+      transform-origin: top;
+      transform: rotateX(0deg);
+      transition: transform 0.5s ease;
+      z-index: 1;
+    }
+    .envelope.open .flap {
+      transform: rotateX(-180deg);
     }
 
+    /* Inline expandable players & gallery */
     .expand-card {
       background: white;
       border-radius: 12px;
       box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+      margin: 20px 0;
       overflow: hidden;
-      margin-bottom: 20px;
-      transition: max-height 0.6s ease;
+      position: relative;
+      transition: transform 0.3s;
     }
-
+    .expand-card:hover {
+      transform: translateY(-5px) scale(1.01);
+    }
     .expand-header {
       background: #c2185b;
       color: white;
       padding: 20px;
       font-weight: bold;
+      font-size: 1rem;
       cursor: pointer;
     }
-
     .expand-content {
-      background: #fff0f5;
       padding: 0 20px;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.6s ease, padding 0.3s ease;
     }
-
     .expand.open .expand-content {
       padding: 20px;
-      max-height: 1000px;
+      max-height: 600px;
+    }
+    .expand-content iframe, .expand-content img {
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 8px;
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #777;
-      border-top: 1px solid #f4c4d4;
-      user-select: none;
+    /* Optional ambient audio icon */
+    #audioControl {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #d6336c;
+      color: #fff;
+      border-radius: 50%;
+      width: 50px; height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
   </style>
 </head>
 <body>
 
-<!-- Floating animated hearts -->
-<div class="hearts-container">
-  <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
-  <div class="heart" style="left: 25%; animation-delay: 2s;"></div>
-  <div class="heart" style="left: 50%; animation-delay: 4s;"></div>
-  <div class="heart" style="left: 70%; animation-delay: 1s;"></div>
-  <div class="heart" style="left: 85%; animation-delay: 3s;"></div>
-</div>
+  <!-- Heart & petal background -->
+  <div class="particles"></div>
 
-<main>
-  <!-- Intro -->
-  <iframe
-    srcdoc='
+  <!-- Optional ambient lovers’ music -->
+  <audio id="ambientAudio" loop>
+    <source src="https://example.com/soft-piano.mp3" type="audio/mp3">
+  </audio>
+  <div id="audioControl">🔊</div>
+
+  <main>
+    <iframe srcdoc='
       <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8"/>
-        <title>Happy Birthday!</title>
-        <style>
-          body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            color: #880e4f;
-            flex-direction: column;
-            text-align: center;
-          }
-          h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-          }
-          p {
-            font-size: 1.25rem;
-            max-width: 400px;
-            margin: 0 auto;
-          }
-          button {
-            margin-top: 2rem;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            background-color: #d6336c;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-          }
-          button:hover {
-            background-color: #a5274b;
-          }
-        </style>
-      </head>
+      <html lang="en"><head><meta charset="UTF-8"/><title>Happy Birthday!</title><style>
+        body {margin:0; display:flex; justify-content:center;align-items:center;height:100vh;
+          background:linear-gradient(135deg,#fce4ec,#f8bbd0); font-family:"Segoe UI",sans-serif;
+          color:#880e4f; text-align:center;}
+        h1{font-size:3rem;margin:0;}
+        p{font-size:1.25rem;}
+        button{margin-top:2rem;padding:0.75rem 1.5rem;font-size:1rem;background:#d6336c;color:#fff;border:none;border-radius:8px;cursor:pointer;transition:background .3s;}
+        button:hover{background:#a5274b;}
+      </style></head>
       <body>
         <h1>Happy Birthday, My Love! 🎉</h1>
         <p>Scroll down to see your special letters and surprises.</p>
         <button onclick="parent.location.href=\'#letters\'">Show Me 💌</button>
-      </body>
-      </html>
-    '
-    loading="eager"
-  ></iframe>
+      </body></html>' loading="eager"></iframe>
 
-  <div class="divider" id="letters">💌 Scroll down for your letters and surprises 💌</div>
+    <h2 class="divider" id="letters">💌 Scroll Down for Love & Surprises 💌</h2>
 
-  <section class="section">
-    <h2 style="text-align: center; color: #d6336c;">Open When Letters 💖</h2>
-
+    <!-- Envelopes -->
     <div class="envelope">
+      <div class="flap"></div>
       <div class="envelope-header">Open when you miss me</div>
-      <div class="envelope-content">
-        I miss you too. Even from far away, I'm always with you in spirit, in love, in everything.
-      </div>
+      <div class="envelope-content">I miss you too… always with you in everything.</div>
     </div>
 
     <div class="envelope">
+      <div class="flap"></div>
       <div class="envelope-header">Open when you're sad</div>
-      <div class="envelope-content">
-        You don’t have to smile all the time. It’s okay to feel down — I’m here for you, always. I believe in you.
-      </div>
+      <div class="envelope-content">You don’t have to smile all the time — I believe in you.</div>
     </div>
 
     <div class="envelope">
+      <div class="flap"></div>
       <div class="envelope-header">Open when you can’t sleep</div>
-      <div class="envelope-content">
-        Close your eyes and think of us. Breathe in, breathe out. I’m hugging you from here.
-      </div>
+      <div class="envelope-content">Breathe, imagine my arms around you… and drift to dreamland.</div>
     </div>
 
-    <div class="divider">🎧 Our Playlist</div>
+    <!-- Spotify Playlist -->
+    <h2 class="divider">🎧 Our Playlist</h2>
     <div class="expand-card expand">
-      <div class="expand-header">Click to Listen</div>
+      <div class="expand-header">Click to Listen Together</div>
       <div class="expand-content">
-        <iframe style="height: 380px; width: 100%; border: none; border-radius: 8px;"
-          src="https://open.spotify.com/embed/playlist/your-playlist-id"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        ></iframe>
-        <p style="text-align:center; font-style: italic; margin-top: 10px;">(Replace with your actual Spotify playlist)</p>
+        <iframe allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          src="https://open.spotify.com/embed/playlist/your-playlist-id"></iframe>
       </div>
     </div>
 
-    <div class="divider">📸 Photo Memories</div>
+    <!-- Photo Memories -->
+    <h2 class="divider">📸 Photo Memories</h2>
     <div class="expand-card expand">
-      <div class="expand-header">Click to Reveal Memories</div>
+      <div class="expand-header">Reveal Our Memories</div>
       <div class="expand-content">
-        <img src="your-image-link.jpg" alt="Memory 1" style="width: 100%; border-radius: 10px; margin-bottom: 10px;" />
-        <img src="your-image-link-2.jpg" alt="Memory 2" style="width: 100%; border-radius: 10px;" />
-        <p style="text-align:center; font-style: italic; margin-top: 10px;">(Replace with your photos)</p>
+        <img src="your-image-link-1.jpg" alt="Memory 1" />
+        <img src="your-image-link-2.jpg" alt="Memory 2" />
       </div>
     </div>
-  </section>
-</main>
 
-<footer>
-  Made with so much love by your girl 💕
-</footer>
+    <!-- Our Story Video -->
+    <h2 class="divider">🎥 Our Story</h2>
+    <div class="expand-card expand">
+      <div class="expand-header">Play Our Video</div>
+      <div class="expand-content">
+        <iframe loading="lazy"
+          src="https://www.youtube.com/embed/your-video-id"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </main>
 
-<script>
-  document.querySelectorAll('.envelope').forEach(env => {
-    env.querySelector('.envelope-header').addEventListener('click', () => {
-      env.classList.toggle('open');
+  <footer>Made with all my heart by your girl 💕</footer>
+
+  <script>
+    // Envelope & Card toggles
+    document.querySelectorAll('.envelope').forEach(e => {
+      e.querySelector('.envelope-header').onclick = () => e.classList.toggle('open');
     });
-  });
-
-  document.querySelectorAll('.expand').forEach(card => {
-    card.querySelector('.expand-header').addEventListener('click', () => {
-      card.classList.toggle('open');
+    document.querySelectorAll('.expand').forEach(c => {
+      c.querySelector('.expand-header').onclick = () => c.classList.toggle('open');
     });
-  });
-</script>
 
+    // Ambient audio toggle
+    const audio = document.getElementById('ambientAudio');
+    const control = document.getElementById('audioControl');
+    control.onclick = () => {
+      if (audio.paused) { audio.play(); control.textContent = '🔇'; }
+      else { audio.pause(); control.textContent = '🔊'; }
+    };
+
+    // Create drifting hearts & petals
+    const container = document.querySelector('.particles');
+    const colors = { heart: 'red', petal: '#ffc0cb' };
+    setInterval(() => {
+      const isHeart = Math.random() < 0.6;
+      const el = document.createElement('div');
+      const size = isHeart ? 20 : 10 + Math.random()*10;
+      el.className = isHeart ? 'heart' : 'petal';
+      el.style.width = el.style.height = size+'px';
+      el.style.left = Math.random()*100 + 'vw';
+      el.style.animation = `drift ${8+Math.random()*7}s linear`;
+      container.append(el);
+      setTimeout(() => el.remove(), 20000);
+    }, 500);
+  </script>
 </body>
 </html>
