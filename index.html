@@ -8,19 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <!-- Page 1 - Cover -->
-        <div class="page active" id="page1">
+    <div class="main-container">
+        <!-- Cover Section -->
+        <section class="section" id="cover">
             <h1>Happy Birthday,</h1>
             <h2>My Love</h2>
             <p>I've made something special for you...</p>
-            <div class="nav-buttons">
-                <button onclick="navigateTo('page2')">Open When Letters</button>
-                <button onclick="navigateTo('page3')">Our Playlist</button>
-                <button onclick="navigateTo('page4')">Movies to Watch</button>
-            </div>
-        </div>
-        <div class="page" id="page2">
+            <div class="scroll-hint">↓ Scroll down ↓</div>
+        </section>
+
+        <!-- Open When Letters Section -->
+        <section class="section" id="letters">
             <h1>Open When Letters</h1>
             <div class="envelopes-container">
                 <div class="envelope" onclick="openLetter('letter1')">
@@ -61,20 +59,18 @@
                     </div>
                 </div>
             </div>
-            <button class="back-button" onclick="navigateTo('page1')">Back</button>
-        </div>
+        </section>
 
-        <!-- Page 3 - Playlist -->
-        <div class="page" id="page3">
+        <!-- Playlist Section -->
+        <section class="section" id="playlist">
             <h1>Our Playlist</h1>
             <div class="spotify-embed">
                 <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4Wsb4d7NKfP" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
-            <button class="back-button" onclick="navigateTo('page1')">Back</button>
-        </div>
+        </section>
 
-        <!-- Page 4 - Movies -->
-        <div class="page" id="page4">
+        <!-- Movies Section -->
+        <section class="section" id="movies">
             <h1>Movies to Watch</h1>
             <div class="netflix-embed">
                 <iframe src="https://www.netflix.com/watch/80234304?trackId=255824129" width="300" height="200" frameborder="0" allowfullscreen></iframe>
@@ -89,8 +85,15 @@
                     <li>Eternal Sunshine of the Spotless Mind</li>
                 </ul>
             </div>
-            <button class="back-button" onclick="navigateTo('page1')">Back</button>
-        </div>
+        </section>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <a href="#cover" class="nav-dot active"></a>
+        <a href="#letters" class="nav-dot"></a>
+        <a href="#playlist" class="nav-dot"></a>
+        <a href="#movies" class="nav-dot"></a>
     </div>
 
     <script src="script.js"></script>
