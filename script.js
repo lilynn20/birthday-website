@@ -15,7 +15,6 @@ function closeLetter(letterId) {
     document.getElementById(letterId).classList.remove('open');
 }
 
-// Highlight active navigation dot based on scroll position
 document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('.section');
     const navDots = document.querySelectorAll('.nav-dot');
