@@ -1,3 +1,43 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Create floating hearts
+    function createHearts() {
+        const heartsContainer = document.querySelector('.floating-hearts');
+        const heartCount = 12;
+        
+        for (let i = 0; i < heartCount; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '<i class="fas fa-heart"></i>';
+            
+            // Random position and animation
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.fontSize = `${15 + Math.random() * 25}px`;
+            heart.style.animationDuration = `${10 + Math.random() * 15}s`;
+            heart.style.animationDelay = `${Math.random() * 5}s`;
+            
+            heartsContainer.appendChild(heart);
+        }
+    }
+    
+    createHearts();
+    
+    // Smooth scroll to next section when button is clicked
+    const showMeBtn = document.querySelector('.show-me-btn');
+    if (showMeBtn) {
+        showMeBtn.addEventListener('click', function() {
+            // Assuming next section is letters section
+            const nextSection = document.querySelector('#letters');
+            if (nextSection) {
+                window.scrollTo({
+                    top: nextSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
+    
+    // Rest of your existing JavaScript...
+});
 function openLetter(letterId) {
     // Close any other open letters first
     document.querySelectorAll('.letter').forEach(letter => {
