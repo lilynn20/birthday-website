@@ -12,7 +12,180 @@ body {
     overflow-y: scroll;
     height: 100vh;
 }
+/* Modern, spacious cover section */
+.cover-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #fff0f3 0%, #ffd6de 100%);
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+}
 
+.cover-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 70vh;
+    z-index: 2;
+}
+
+.birthday-message {
+    animation: fadeIn 1.5s ease-out;
+    margin-top: 10vh;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2 {
+    font-family: 'Dancing Script', cursive;
+    color: #e75480;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cover-section h1 {
+    font-size: 4.5rem;
+    margin-bottom: 0;
+}
+
+.cover-section h2 {
+    font-size: 3.5rem;
+    margin-top: 0;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-top: 25px;
+    color: #555;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.scroll-prompt {
+    margin-bottom: 10vh;
+    animation: fadeIn 1s ease-out 0.5s both;
+}
+
+.scroll-prompt p {
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.show-me-btn {
+    background-color: #e75480;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(231, 84, 128, 0.3);
+}
+
+.show-me-btn:hover {
+    background-color: #d1426f;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(231, 84, 128, 0.4);
+}
+
+.show-me-btn i {
+    transition: transform 0.3s ease;
+}
+
+.show-me-btn:hover i {
+    transform: translateY(3px);
+}
+
+/* Floating hearts */
+.floating-hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    color: rgba(231, 84, 128, 0.6);
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cover-section h1 {
+        font-size: 3.5rem;
+    }
+    
+    .cover-section h2 {
+        font-size: 2.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1.3rem;
+    }
+    
+    .show-me-btn {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cover-section h1 {
+        font-size: 2.8rem;
+    }
+    
+    .cover-section h2 {
+        font-size: 2.2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .scroll-prompt p {
+        font-size: 1rem;
+    }
+}
 .main-container {
     width: 100%;
     /* remove height and overflow here */
