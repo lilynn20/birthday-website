@@ -15,7 +15,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Floating hearts animation */
+    /* Floating red hearts background */
     body::before {
       content: "";
       position: fixed;
@@ -27,7 +27,7 @@
                   radial-gradient(red 1px, transparent 1px);
       background-size: 20px 20px;
       background-position: 0 0, 10px 10px;
-      opacity: 0.1;
+      opacity: 0.15;
     }
 
     .hearts-container {
@@ -108,9 +108,8 @@
       border-radius: 8px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
-      cursor: pointer;
       overflow: hidden;
-      transition: max-height 0.4s ease;
+      transition: max-height 0.6s ease;
     }
 
     .envelope-header {
@@ -118,28 +117,63 @@
       background: #d6336c;
       color: #fff;
       font-weight: bold;
-      font-size: 1.2rem;
-      text-align: center;
-      user-select: none;
+      font-size: 1.1rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .envelope-header::before {
+      content: "✉️";
+      margin-right: 10px;
+      font-size: 1.3rem;
     }
 
     .envelope-content {
       background: #fff0f5;
-      padding: 20px;
-      display: none;
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease, padding 0.3s ease;
       font-style: italic;
       line-height: 1.6;
       color: #333;
     }
 
     .envelope.open .envelope-content {
-      display: block;
-      animation: fadeIn 0.5s ease;
+      padding: 20px;
+      max-height: 300px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .expand-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: max-height 0.6s ease;
+    }
+
+    .expand-header {
+      background: #c2185b;
+      color: white;
+      padding: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .expand-content {
+      background: #fff0f5;
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease, padding 0.3s ease;
+    }
+
+    .expand.open .expand-content {
+      padding: 20px;
+      max-height: 1000px;
     }
 
     footer {
@@ -164,7 +198,7 @@
 </div>
 
 <main>
-  <!-- Intro iframe -->
+  <!-- Intro -->
   <iframe
     srcdoc='
       <!DOCTYPE html>
@@ -246,6 +280,28 @@
         Close your eyes and think of us. Breathe in, breathe out. I’m hugging you from here.
       </div>
     </div>
+
+    <div class="divider">🎧 Our Playlist</div>
+    <div class="expand-card expand">
+      <div class="expand-header">Click to Listen</div>
+      <div class="expand-content">
+        <iframe style="height: 380px; width: 100%; border: none; border-radius: 8px;"
+          src="https://open.spotify.com/embed/playlist/your-playlist-id"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        ></iframe>
+        <p style="text-align:center; font-style: italic; margin-top: 10px;">(Replace with your actual Spotify playlist)</p>
+      </div>
+    </div>
+
+    <div class="divider">📸 Photo Memories</div>
+    <div class="expand-card expand">
+      <div class="expand-header">Click to Reveal Memories</div>
+      <div class="expand-content">
+        <img src="your-image-link.jpg" alt="Memory 1" style="width: 100%; border-radius: 10px; margin-bottom: 10px;" />
+        <img src="your-image-link-2.jpg" alt="Memory 2" style="width: 100%; border-radius: 10px;" />
+        <p style="text-align:center; font-style: italic; margin-top: 10px;">(Replace with your photos)</p>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -255,8 +311,14 @@
 
 <script>
   document.querySelectorAll('.envelope').forEach(env => {
-    env.addEventListener('click', () => {
+    env.querySelector('.envelope-header').addEventListener('click', () => {
       env.classList.toggle('open');
+    });
+  });
+
+  document.querySelectorAll('.expand').forEach(card => {
+    card.querySelector('.expand-header').addEventListener('click', () => {
+      card.classList.toggle('open');
     });
   });
 </script>
