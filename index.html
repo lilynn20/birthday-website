@@ -161,6 +161,44 @@
             }
         }
 
+        /* Navigation */
+        .page-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 99;
+        }
+
+        .nav-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            color: #e75480;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .nav-link:hover {
+            background-color: #e75480;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .nav-link.active {
+            background-color: #e75480;
+            color: white;
+        }
+
         /* Letters Section */
         .letters-section {
             background-color: #fff9fa;
@@ -288,67 +326,67 @@
 
         /* Movies Section */
         /* Movie cards container */
-.movie-cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 25px;
-  max-width: 900px;
-  margin: 30px auto 10px auto;
-  padding: 0 20px;
-}
+        .movie-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            max-width: 900px;
+            margin: 30px auto 10px auto;
+            padding: 0 20px;
+        }
 
-.movie-card {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: #e75480;
-  font-weight: 600;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(231, 84, 128, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #fff0f4;
-  overflow: hidden;
-}
+        .movie-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: #e75480;
+            font-weight: 600;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(231, 84, 128, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #fff0f4;
+            overflow: hidden;
+        }
 
-.movie-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(231, 84, 128, 0.5);
-}
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(231, 84, 128, 0.5);
+        }
 
-.movie-card img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-bottom: 3px solid #e75480;
-}
+        .movie-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-bottom: 3px solid #e75480;
+        }
 
-.movie-title {
-  padding: 12px 10px;
-  text-align: center;
-  font-size: 1.1rem;
-  font-family: 'Montserrat', sans-serif;
-  background-color: #fff5f5;
-}
+        .movie-title {
+            padding: 12px 10px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fff5f5;
+        }
 
-/* Note below the cards */
-.movies-section .note {
-  text-align: center;
-  font-size: 0.85rem;
-  color: #666;
-  margin-top: 20px;
-}
+        /* Note below the cards */
+        .movies-section .note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 20px;
+        }
 
-/* Responsive tweaks */
-@media (max-width: 480px) {
-  .movie-cards-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+        /* Responsive tweaks */
+        @media (max-width: 480px) {
+            .movie-cards-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
 
-  .movie-card {
-    font-size: 0.95rem;
-  }
-}
+            .movie-card {
+                font-size: 0.95rem;
+            }
+        }
 
         .movies-section {
             background-color: #fff9fa;
@@ -418,7 +456,7 @@
         }
 
         /* Friends Messages Section */
-       .friends-section {
+        .friends-section {
             background: linear-gradient(135deg, #f0f8ff 0%, #e6f0fa 100%);
             display: flex;
             flex-direction: column;
@@ -656,10 +694,9 @@
 <body>
     <!-- Hidden audio element for background music -->
     <audio id="bgMusic" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-hearty.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
-
+        <source src="https://www.bensound.com/bensound-music/bensound-hearty.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <!-- Music control button -->
     <div class="music-control" id="musicControl">
@@ -757,36 +794,36 @@
 
         <!-- Movies Section -->
         <section class="section movies-section" id="movies">
-  <h1 class="section-title">Movies to Watch</h1>
+            <h1 class="section-title">Movies to Watch</h1>
 
-  <div class="movie-cards-container">
-    <!-- Movie Card 1 -->
-    <a href="https://www.netflix.com/watch/550538" target="_blank" rel="noopener noreferrer" class="movie-card">
-      <img src="https://occ-0-1432-1433.1.nflxso.net/art/85c7a/87bf37a146eb65b381d6b542327c73507e385c7a.jpg" alt="The Notebook Poster" />
-      <div class="movie-title">The Notebook</div>
-    </a>
+            <div class="movie-cards-container">
+                <!-- Movie Card 1 -->
+                <a href="https://www.netflix.com/watch/550538" target="_blank" rel="noopener noreferrer" class="movie-card">
+                    <img src="https://occ-0-1432-1433.1.nflxso.net/art/85c7a/87bf37a146eb65b381d6b542327c73507e385c7a.jpg" alt="The Notebook Poster" />
+                    <div class="movie-title">The Notebook</div>
+                </a>
 
-    <!-- Movie Card 2 -->
-    <a href="https://www.netflix.com/watch/80095306" target="_blank" rel="noopener noreferrer" class="movie-card">
-      <img src="https://m.media-amazon.com/images/I/71aJ0BTYNZL._AC_SY679_.jpg" alt="La La Land Poster" />
-      <div class="movie-title">La La Land</div>
-    </a>
+                <!-- Movie Card 2 -->
+                <a href="https://www.netflix.com/watch/80095306" target="_blank" rel="noopener noreferrer" class="movie-card">
+                    <img src="https://m.media-amazon.com/images/I/71aJ0BTYNZL._AC_SY679_.jpg" alt="La La Land Poster" />
+                    <div class="movie-title">La La Land</div>
+                </a>
 
-    <!-- Movie Card 3 -->
-    <a href="https://www.netflix.com/watch/60011152" target="_blank" rel="noopener noreferrer" class="movie-card">
-      <img src="https://upload.wikimedia.org/wikipedia/en/d/db/Before_Sunrise_movie_poster.jpg" alt="Before Sunrise Poster" />
-      <div class="movie-title">Before Sunrise</div>
-    </a>
+                <!-- Movie Card 3 -->
+                <a href="https://www.netflix.com/watch/60011152" target="_blank" rel="noopener noreferrer" class="movie-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/d/db/Before_Sunrise_movie_poster.jpg" alt="Before Sunrise Poster" />
+                    <div class="movie-title">Before Sunrise</div>
+                </a>
 
-    <!-- Movie Card 4 -->
-    <a href="https://www.netflix.com/watch/70158204" target="_blank" rel="noopener noreferrer" class="movie-card">
-      <img src="https://upload.wikimedia.org/wikipedia/en/1/16/Eternal_Sunshine_of_the_Spotless_Mind_poster.jpg" alt="Eternal Sunshine Poster" />
-      <div class="movie-title">Eternal Sunshine of the Spotless Mind</div>
-    </a>
-  </div>
+                <!-- Movie Card 4 -->
+                <a href="https://www.netflix.com/watch/70158204" target="_blank" rel="noopener noreferrer" class="movie-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/1/16/Eternal_Sunshine_of_the_Spotless_Mind_poster.jpg" alt="Eternal Sunshine Poster" />
+                    <div class="movie-title">Eternal Sunshine of the Spotless Mind</div>
+                </a>
+            </div>
 
-  <p class="note">Note: You'll need to be logged into Netflix to view this content.</p>
-</section>
+            <p class="note">Note: You'll need to be logged into Netflix to view this content.</p>
+        </section>
 
         <!-- Friends Messages Section -->
         <section class="section friends-section" id="friends">
@@ -837,7 +874,6 @@
                 </div>
             </div>
         </section>
-
     </div>
 
     <!-- Navigation -->
