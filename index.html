@@ -331,84 +331,63 @@
         }
 
         /* Playlist Section */
-        .playlist-section {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+        /* Updated Playlist Section Styles */
+.playlist-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 20px; /* Added more padding */
+}
 
-        .playlist-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-            gap: 40px;
-        }
+.playlist-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    gap: 40px;
+    height: 100%; /* Added to fill section */
+    justify-content: center; /* Center vertically */
+}
 
-        .playlist-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+.playlist-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; /* Center items vertically */
+    gap: 40px;
+    width: 100%;
+    margin-top: 20px; /* Added space between header and content */
+}
 
-        .playlist-header h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
+.playlist-text {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    color: #555;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+    border-radius: 12px; /* Matching the embed's border radius */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
 
-        .playlist-header p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-        }
-
-        .playlist-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            width: 100%;
-        }
-
-        .playlist-text {
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            color: #555;
-        }
-
-        .playlist-text h3 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
-            color: #e75480;
-            margin-bottom: 20px;
-        }
-
-        .playlist-text p {
-            line-height: 1.8;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-
-        .spotify-embed {
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            position: relative;
-            z-index: 1;
-            margin-bottom: -20px; /* Remove extra space */
-        }
-
+.spotify-embed {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+    height: 380px; /* Fixed height */
+}
         .spotify-embed iframe {
             width: 100%;
             height: 380px;
@@ -1077,42 +1056,43 @@
         </section>
 
         <!-- Playlist Section -->
-        <section class="section playlist-section" id="playlist">
-            <div class="floating-music">
-                <!-- Music notes will be added by JavaScript -->
-            </div>
-            <div class="playlist-content">
-                <div class="playlist-header">
-                    <h2>Our Love Playlist</h2>
-                    <p>Every song here holds a special memory of us. Press play and let the music take you back to our most beautiful moments together.</p>
-                </div>
+        <!-- Playlist Section -->
+<section class="section playlist-section" id="playlist">
+    <div class="floating-music">
+        <!-- Music notes will be added by JavaScript -->
+    </div>
+    <div class="playlist-content">
+        <div class="playlist-header">
+            <h2>Our Love Playlist</h2>
+            <p>Every song here holds a special memory of us. Press play and let the music take you back to our most beautiful moments together.</p>
+        </div>
+        
+        <div class="playlist-container">
+            <div class="playlist-text">
+                <h3>Why This Playlist?</h3>
+                <p>I've carefully selected each song to represent different aspects of our relationship. From our first conversations to the deep connection we share today, every track tells a part of our story.</p>
+                <p>When you listen to these songs, I hope you feel the same warmth and happiness I feel when I think of you.</p>
                 
-                <div class="playlist-container">
-                    <div class="playlist-text">
-                        <h3>Why This Playlist?</h3>
-                        <p>I've carefully selected each song to represent different aspects of our relationship. From our first conversations to the deep connection we share today, every track tells a part of our story.</p>
-                        <p>When you listen to these songs, I hope you feel the same warmth and happiness I feel when I think of you.</p>
-                        
-                        <div class="song-list">
-                            <h4>Featured Songs:</h4>
-                            <ul>
-                                <li><i class="fas fa-music"></i> Perfect - Ed Sheeran</li>
-                                <li><i class="fas fa-music"></i> All of Me - John Legend</li>
-                                <li><i class="fas fa-music"></i> A Thousand Years - Christina Perri</li>
-                                <li><i class="fas fa-music"></i> Can't Help Falling in Love - Elvis Presley</li>
-                                <li><i class="fas fa-music"></i> Just the Way You Are - Bruno Mars</li>
-                                <li><i class="fas fa-music"></i> Thinking Out Loud - Ed Sheeran</li>
-                                <li><i class="fas fa-music"></i> You Are the Reason - Calum Scott</li>
-                                <li><i class="fas fa-music"></i> I Don't Want to Miss a Thing - Aerosmith</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="spotify-embed">
-                        <iframe src="https://open.spotify.com/embed/playlist/1fOi4AxqGheCHqowZn6ixa" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                    </div>
+                <div class="song-list">
+                    <h4>Featured Songs:</h4>
+                    <ul>
+                        <li><i class="fas fa-music"></i> Perfect - Ed Sheeran</li>
+                        <li><i class="fas fa-music"></i> All of Me - John Legend</li>
+                        <li><i class="fas fa-music"></i> A Thousand Years - Christina Perri</li>
+                        <li><i class="fas fa-music"></i> Can't Help Falling in Love - Elvis Presley</li>
+                        <li><i class="fas fa-music"></i> Just the Way You Are - Bruno Mars</li>
+                        <li><i class="fas fa-music"></i> Thinking Out Loud - Ed Sheeran</li>
+                        <li><i class="fas fa-music"></i> You Are the Reason - Calum Scott</li>
+                        <li><i class="fas fa-music"></i> I Don't Want to Miss a Thing - Aerosmith</li>
+                    </ul>
                 </div>
             </div>
-        </section>
+            <div class="spotify-embed">
+                <iframe src="https://open.spotify.com/embed/playlist/1fOi4AxqGheCHqowZn6ixa" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
 
         <!-- Friends Messages Section -->
         <section class="section friends-section" id="friends">
