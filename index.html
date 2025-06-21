@@ -1170,241 +1170,246 @@
     </nav>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create floating hearts
-            function createHearts() {
-                const heartsContainer = document.querySelector('.floating-hearts');
-                const heartCount = 12;
-                
-                for (let i = 0; i < heartCount; i++) {
-                    const heart = document.createElement('div');
-                    heart.classList.add('heart');
-                    heart.innerHTML = '<i class="fas fa-heart"></i>';
-                    
-                    // Random position and animation
-                    heart.style.left = `${Math.random() * 100}%`;
-                    heart.style.fontSize = `${15 + Math.random() * 25}px`;
-                    heart.style.animationDuration = `${10 + Math.random() * 15}s`;
-                    heart.style.animationDelay = `${Math.random() * 5}s`;
-                    
-                    heartsContainer.appendChild(heart);
-                }
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Create floating hearts
+        function createHearts() {
+            const heartsContainer = document.querySelector('.floating-hearts');
+            const heartCount = 12;
             
-            createHearts();
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                
+                // Random position and animation
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.fontSize = `${15 + Math.random() * 25}px`;
+                heart.style.animationDuration = `${10 + Math.random() * 15}s`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        createHearts();
 
-            // Create floating music notes
-            function createMusicNotes() {
-                const musicContainer = document.querySelector('.floating-music');
-                const noteCount = 15;
-                const noteIcons = ['fa-music', 'fa-headphones', 'fa-play', 'fa-compact-disc'];
+        // Create floating music notes
+        function createMusicNotes() {
+            const musicContainer = document.querySelector('.floating-music');
+            const noteCount = 15;
+            const noteIcons = ['fa-music', 'fa-headphones', 'fa-play', 'fa-compact-disc'];
+            
+            for (let i = 0; i < noteCount; i++) {
+                const note = document.createElement('div');
+                note.classList.add('music-note');
+                const randomIcon = noteIcons[Math.floor(Math.random() * noteIcons.length)];
+                note.innerHTML = `<i class="fas ${randomIcon}"></i>`;
                 
-                for (let i = 0; i < noteCount; i++) {
-                    const note = document.createElement('div');
-                    note.classList.add('music-note');
-                    const randomIcon = noteIcons[Math.floor(Math.random() * noteIcons.length)];
-                    note.innerHTML = `<i class="fas ${randomIcon}"></i>`;
-                    
-                    // Random position and animation
-                    note.style.left = `${Math.random() * 100}%`;
-                    note.style.fontSize = `${20 + Math.random() * 30}px`;
-                    note.style.animationDuration = `${8 + Math.random() * 12}s`;
-                    note.style.animationDelay = `${Math.random() * 5}s`;
-                    
-                    musicContainer.appendChild(note);
-                }
+                // Random position and animation
+                note.style.left = `${Math.random() * 100}%`;
+                note.style.fontSize = `${20 + Math.random() * 30}px`;
+                note.style.animationDuration = `${8 + Math.random() * 12}s`;
+                note.style.animationDelay = `${Math.random() * 5}s`;
+                
+                musicContainer.appendChild(note);
             }
-            
-            createMusicNotes();
-            
-            // Smooth scroll to next section when button is clicked
-            const showMeBtn = document.querySelector('.show-me-btn');
-            if (showMeBtn) {
-                showMeBtn.addEventListener('click', function() {
-                    const nextSection = document.querySelector('#letters');
-                    if (nextSection) {
-                        window.scrollTo({
-                            top: nextSection.offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            }
-            
-            // Letter functionality
-            function openLetter(letterId) {
-                // Create overlay if it doesn't exist
-                let overlay = document.querySelector('.letter-overlay');
-                if (!overlay) {
-                    overlay = document.createElement('div');
-                    overlay.className = 'letter-overlay';
-                    document.body.appendChild(overlay);
-                }
-                overlay.style.display = 'block';
-                
-                // Close any other open letters first
-                document.querySelectorAll('.letter').forEach(letter => {
-                    if (letter.id !== letterId && letter.classList.contains('open')) {
-                        letter.classList.remove('open');
-                    }
-                });
-                
-                // Open the selected letter
-                const letter = document.getElementById(letterId);
-                letter.classList.add('open');
-                
-                // Close letter when clicking outside
-                overlay.onclick = function() {
-                    closeLetter(letterId);
-                };
-            }
-            
-            function closeLetter(letterId) {
-                document.getElementById(letterId).classList.remove('open');
-                const overlay = document.querySelector('.letter-overlay');
-                if (overlay) {
-                    overlay.style.display = 'none';
-                }
-            }
-            
-            // Attach event listeners to envelopes
-            document.querySelectorAll('.envelope').forEach(envelope => {
-                envelope.addEventListener('click', function(e) {
-                    // Don't open if clicking on the close button of an open letter
-                    if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
-                        return;
-                    }
-                    
-                    const letter = this.querySelector('.letter');
-                    if (letter) {
-                        openLetter(letter.id);
-                    }
-                });
-            });
-            
-            // Image zoom functionality
-            const messageImages = document.querySelectorAll('.message-screenshot');
-            const imageModal = document.getElementById('imageModal');
-            const zoomedImage = document.getElementById('zoomedImage');
-            const closeModal = document.querySelector('.close-modal');
-            
-            messageImages.forEach(img => {
-                img.addEventListener('click', function() {
-                    zoomedImage.src = this.src;
-                    imageModal.style.display = 'flex';
-                });
-            });
-            
-            closeModal.addEventListener('click', function() {
-                imageModal.style.display = 'none';
-            });
-            
-            imageModal.addEventListener('click', function(e) {
-                if (e.target === imageModal) {
-                    imageModal.style.display = 'none';
-                }
-            });
-            
-            // Update active navigation link based on scroll position
-            const sections = document.querySelectorAll('.section');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            function updateActiveNav() {
-                let current = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (window.pageYOffset >= (sectionTop - sectionHeight / 3)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', updateActiveNav);
-            updateActiveNav(); // Initialize
-            
-            // Smooth scroll for navigation links
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
+        }
+        
+        createMusicNotes();
+        
+        // Smooth scroll to next section when button is clicked
+        const showMeBtn = document.querySelector('.show-me-btn');
+        if (showMeBtn) {
+            showMeBtn.addEventListener('click', function() {
+                const nextSection = document.querySelector('#letters');
+                if (nextSection) {
                     window.scrollTo({
-                        top: targetSection.offsetTop,
+                        top: nextSection.offsetTop,
                         behavior: 'smooth'
                     });
-                });
-            });
-            
-            // Music control functionality
-            const bgMusic = document.getElementById('bgMusic');
-            const musicControl = document.getElementById('musicControl');
-            const volumeSlider = document.getElementById('volumeSlider');
-            let isPlaying = false;
-
-            // Set initial volume
-            bgMusic.volume = volumeSlider.value;
-
-            // Volume control - THIS IS THE FIX
-            volumeSlider.addEventListener('input', function() {
-                bgMusic.volume = this.value;
-                
-                // Update volume icons based on volume level
-                const volumeDown = this.parentElement.querySelector('.fa-volume-down');
-                const volumeUp = this.parentElement.querySelector('.fa-volume-up');
-                
-                if (this.value == 0) {
-                    volumeDown.className = 'fas fa-volume-mute';
-                    volumeUp.className = 'fas fa-volume-mute';
-                } else if (this.value < 0.5) {
-                    volumeDown.className = 'fas fa-volume-down';
-                    volumeUp.className = 'fas fa-volume-down';
-                } else {
-                    volumeDown.className = 'fas fa-volume-up';
-                    volumeUp.className = 'fas fa-volume-up';
                 }
             });
-
-            // Try to autoplay (may be blocked by browser)
-            bgMusic.volume = 0.3; // Set initial volume
-            const playPromise = bgMusic.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    // Autoplay started
-                    isPlaying = true;
-                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
-                })
-                .catch(error => {
-                    // Autoplay was prevented
-                    isPlaying = false;
-                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
-                });
+        }
+        
+        // Letter functionality
+        function openLetter(letterId) {
+            // Create overlay if it doesn't exist
+            let overlay = document.querySelector('.letter-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'letter-overlay';
+                document.body.appendChild(overlay);
             }
+            overlay.style.display = 'block';
             
-            // Toggle play/pause on click
-            musicControl.addEventListener('click', function() {
-                if (isPlaying) {
-                    bgMusic.pause();
-                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
-                } else {
-                    bgMusic.play();
-                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+            // Close any other open letters first
+            document.querySelectorAll('.letter').forEach(letter => {
+                if (letter.id !== letterId && letter.classList.contains('open')) {
+                    letter.classList.remove('open');
                 }
-                isPlaying = !isPlaying;
             });
+            
+            // Open the selected letter
+            const letter = document.getElementById(letterId);
+            letter.classList.add('open');
+            
+            // Close letter when clicking outside
+            overlay.onclick = function() {
+                closeLetter(letterId);
+            };
+        }
+        
+        function closeLetter(letterId) {
+            document.getElementById(letterId).classList.remove('open');
+            const overlay = document.querySelector('.letter-overlay');
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+        }
+        
+        // Attach event listeners to envelopes
+        document.querySelectorAll('.envelope').forEach(envelope => {
+            envelope.addEventListener('click', function(e) {
+                // Don't open if clicking on the close button of an open letter
+                if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                    return;
+                }
+                
+                const letter = this.querySelector('.letter');
+                if (letter) {
+                    openLetter(letter.id);
+                }
+            });
+        });
+        
+        // Image zoom functionality
+        const messageImages = document.querySelectorAll('.message-screenshot');
+        const imageModal = document.getElementById('imageModal');
+        const zoomedImage = document.getElementById('zoomedImage');
+        const closeModal = document.querySelector('.close-modal');
+        
+        messageImages.forEach(img => {
+            img.addEventListener('click', function() {
+                zoomedImage.src = this.src;
+                imageModal.style.display = 'flex';
+            });
+        });
+        
+        closeModal.addEventListener('click', function() {
+            imageModal.style.display = 'none';
+        });
+        
+        imageModal.addEventListener('click', function(e) {
+            if (e.target === imageModal) {
+                imageModal.style.display = 'none';
             }
         });
-    </script>
+        
+        // Update active navigation link based on scroll position
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function updateActiveNav() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav(); // Initialize
+        
+        // Smooth scroll for navigation links
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Music control functionality
+        const bgMusic = document.getElementById('bgMusic');
+        const musicControl = document.getElementById('musicControl');
+        const volumeSlider = document.getElementById('volumeSlider');
+        let isPlaying = false;
+
+        // Set initial volume
+        bgMusic.volume = volumeSlider.value;
+
+        // Volume control
+        volumeSlider.addEventListener('input', function() {
+            bgMusic.volume = this.value;
+            
+            // Update volume icons based on volume level
+            const volumeDown = this.parentElement.querySelector('.fa-volume-down');
+            const volumeUp = this.parentElement.querySelector('.fa-volume-up');
+            
+            if (this.value == 0) {
+                volumeDown.className = 'fas fa-volume-mute';
+                volumeUp.className = 'fas fa-volume-mute';
+            } else if (this.value < 0.5) {
+                volumeDown.className = 'fas fa-volume-down';
+                volumeUp.className = 'fas fa-volume-down';
+            } else {
+                volumeDown.className = 'fas fa-volume-up';
+                volumeUp.className = 'fas fa-volume-up';
+            }
+        });
+
+        // Try to autoplay (may be blocked by browser)
+        bgMusic.volume = 0.3; // Set initial volume
+        const playPromise = bgMusic.play();
+        
+        function updatePlayPauseIcon() {
+            const icon = musicControl.querySelector('i');
+            if (icon) {
+                icon.className = isPlaying ? 'fas fa-pause' : 'fas fa-music';
+            }
+        }
+        
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                // Autoplay started
+                isPlaying = true;
+                updatePlayPauseIcon();
+            })
+            .catch(error => {
+                // Autoplay was prevented
+                isPlaying = false;
+                updatePlayPauseIcon();
+            });
+        }
+        
+        // Toggle play/pause on click
+        musicControl.addEventListener('click', function() {
+            if (isPlaying) {
+                bgMusic.pause();
+            } else {
+                bgMusic.play();
+            }
+            isPlaying = !isPlaying;
+            updatePlayPauseIcon();
+        });
+    });
+</script>
 </body>
 </html>
