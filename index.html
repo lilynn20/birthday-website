@@ -205,6 +205,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            padding: 40px 0;
         }
 
         .section-title {
@@ -217,10 +218,10 @@
 
         .envelopes-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             width: 90%;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -228,7 +229,7 @@
         .envelope {
             position: relative;
             cursor: pointer;
-            height: 120px;
+            height: 150px;
         }
 
         .envelope-front {
@@ -258,23 +259,33 @@
             left: 0;
             width: 100%;
             background-color: #fff9f2;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transform: rotateX(90deg);
             transform-origin: top;
             transition: transform 0.5s;
             z-index: 10;
             display: none;
             border-top: 5px solid #ff6b8b;
-            height: 100%;
-            box-sizing: border-box;
+            height: auto;
+            min-height: 150px;
+            max-height: 400px;
             overflow-y: auto;
+            box-sizing: border-box;
         }
 
         .letter.open {
             display: block;
             transform: rotateX(0deg);
+            z-index: 100;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(0deg);
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
         }
 
         .letter-content {
@@ -282,9 +293,9 @@
         }
 
         .letter p {
-            margin: 10px 0;
+            margin: 15px 0;
             line-height: 1.6;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         .letter button {
@@ -292,7 +303,7 @@
             background-color: #e75480;
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
@@ -300,11 +311,23 @@
             align-items: center;
             gap: 8px;
             transition: background-color 0.3s;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         .letter button:hover {
             background-color: #ff2d42;
+        }
+
+        /* Overlay for when letter is open */
+        .letter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+            display: none;
         }
 
         /* Playlist Section */
@@ -383,6 +406,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             position: relative;
             z-index: 1;
+            margin-bottom: -20px; /* Remove extra space */
         }
 
         .spotify-embed iframe {
@@ -519,6 +543,7 @@
             transition: transform 0.3s ease;
             position: relative;
             border: 1px solid #eee;
+            cursor: pointer;
         }
 
         .message-item:hover {
@@ -553,6 +578,42 @@
             overflow: hidden;
         }
 
+        /* Zoomable image overlay */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .image-modal-content img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         /* Music Player Controls */
         .music-control {
             position: fixed;
@@ -582,6 +643,12 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .envelopes-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             .cover-section h1 {
                 font-size: 3.5rem;
@@ -629,6 +696,10 @@
             /* Responsive for letters grid */
             .envelopes-container {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .letter.open {
+                width: 90%;
             }
         }
 
@@ -682,6 +753,14 @@
     <!-- Music control button -->
     <div class="music-control" id="musicControl">
         <i class="fas fa-music"></i>
+    </div>
+
+    <!-- Image modal for zooming messages -->
+    <div class="image-modal" id="imageModal">
+        <span class="close-modal">&times;</span>
+        <div class="image-modal-content">
+            <img id="zoomedImage" src="" alt="Zoomed message">
+        </div>
     </div>
 
     <div class="main-container">
@@ -1077,6 +1156,15 @@
             
             // Letter functionality
             function openLetter(letterId) {
+                // Create overlay if it doesn't exist
+                let overlay = document.querySelector('.letter-overlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.className = 'letter-overlay';
+                    document.body.appendChild(overlay);
+                }
+                overlay.style.display = 'block';
+                
                 // Close any other open letters first
                 document.querySelectorAll('.letter').forEach(letter => {
                     if (letter.id !== letterId && letter.classList.contains('open')) {
@@ -1086,21 +1174,58 @@
                 
                 // Open the selected letter
                 const letter = document.getElementById(letterId);
-                letter.classList.toggle('open');
+                letter.classList.add('open');
+                
+                // Close letter when clicking outside
+                overlay.onclick = function() {
+                    closeLetter(letterId);
+                };
             }
             
             function closeLetter(letterId) {
                 document.getElementById(letterId).classList.remove('open');
+                const overlay = document.querySelector('.letter-overlay');
+                if (overlay) {
+                    overlay.style.display = 'none';
+                }
             }
             
             // Attach event listeners to envelopes
             document.querySelectorAll('.envelope').forEach(envelope => {
-                envelope.addEventListener('click', function() {
+                envelope.addEventListener('click', function(e) {
+                    // Don't open if clicking on the close button of an open letter
+                    if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                        return;
+                    }
+                    
                     const letter = this.querySelector('.letter');
                     if (letter) {
                         openLetter(letter.id);
                     }
                 });
+            });
+            
+            // Image zoom functionality
+            const messageImages = document.querySelectorAll('.message-screenshot');
+            const imageModal = document.getElementById('imageModal');
+            const zoomedImage = document.getElementById('zoomedImage');
+            const closeModal = document.querySelector('.close-modal');
+            
+            messageImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    zoomedImage.src = this.src;
+                    imageModal.style.display = 'flex';
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                imageModal.style.display = 'none';
+            });
+            
+            imageModal.addEventListener('click', function(e) {
+                if (e.target === imageModal) {
+                    imageModal.style.display = 'none';
+                }
             });
             
             // Update active navigation link based on scroll position
