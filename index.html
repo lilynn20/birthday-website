@@ -319,20 +319,45 @@
 
         .playlist-content {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
+            gap: 40px;
+        }
+
+        .playlist-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .playlist-header h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .playlist-header p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .playlist-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
         }
 
         .playlist-text {
             flex: 1;
             min-width: 300px;
-            padding: 30px;
+            max-width: 500px;
             color: #555;
         }
 
@@ -352,10 +377,10 @@
         .spotify-embed {
             flex: 1;
             min-width: 300px;
+            max-width: 500px;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            transform: translateX(-50px);
             position: relative;
             z-index: 1;
         }
@@ -459,28 +484,9 @@
             overflow: hidden;
         }
 
-        .message-board::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50px;
-            right: 50px;
-            height: 40px;
-            background-color: #f5f5f5;
-            border-bottom: 1px solid #eee;
-            border-radius: 15px 15px 0 0;
-        }
-
+        .message-board::before,
         .message-board::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background-color: #f5f5f5;
-            border-top: 1px solid #eee;
-            border-radius: 0 0 15px 15px;
+            content: none;
         }
 
         .board-title {
@@ -547,29 +553,6 @@
             overflow: hidden;
         }
 
-        .pin {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background-color: #e75480;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .pin::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: 5px;
-            width: 10px;
-            height: 10px;
-            background-color: #d1426f;
-            border-radius: 50%;
-        }
         /* Music Player Controls */
         .music-control {
             position: fixed;
@@ -633,15 +616,6 @@
             
             .spotify-embed iframe {
                 height: 300px;
-            }
-            
-            .playlist-content {
-                flex-direction: column;
-            }
-            
-            .spotify-embed {
-                transform: none;
-                margin-top: 30px;
             }
             
             .song-list ul {
@@ -952,27 +926,34 @@
                 <!-- Music notes will be added by JavaScript -->
             </div>
             <div class="playlist-content">
-                <div class="playlist-text">
-                    <h3>Our Love Playlist</h3>
-                    <p>Every song here reminds me of you - the way you laugh, the way you look at me, and all the little moments we've shared. Press play and let the music take you back to our most beautiful memories together.</p>
-                    <p>I've carefully selected each track to represent different aspects of our relationship - from our first conversations to the deep connection we share today.</p>
-                    
-                    <div class="song-list">
-                        <h4>Featured Songs:</h4>
-                        <ul>
-                            <li><i class="fas fa-music"></i> Perfect - Ed Sheeran</li>
-                            <li><i class="fas fa-music"></i> All of Me - John Legend</li>
-                            <li><i class="fas fa-music"></i> A Thousand Years - Christina Perri</li>
-                            <li><i class="fas fa-music"></i> Can't Help Falling in Love - Elvis Presley</li>
-                            <li><i class="fas fa-music"></i> Just the Way You Are - Bruno Mars</li>
-                            <li><i class="fas fa-music"></i> Thinking Out Loud - Ed Sheeran</li>
-                            <li><i class="fas fa-music"></i> You Are the Reason - Calum Scott</li>
-                            <li><i class="fas fa-music"></i> I Don't Want to Miss a Thing - Aerosmith</li>
-                        </ul>
-                    </div>
+                <div class="playlist-header">
+                    <h2>Our Love Playlist</h2>
+                    <p>Every song here holds a special memory of us. Press play and let the music take you back to our most beautiful moments together.</p>
                 </div>
-                <div class="spotify-embed">
-                    <iframe src="https://open.spotify.com/embed/playlist/1fOi4AxqGheCHqowZn6ixa" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                
+                <div class="playlist-container">
+                    <div class="playlist-text">
+                        <h3>Why This Playlist?</h3>
+                        <p>I've carefully selected each song to represent different aspects of our relationship. From our first conversations to the deep connection we share today, every track tells a part of our story.</p>
+                        <p>When you listen to these songs, I hope you feel the same warmth and happiness I feel when I think of you.</p>
+                        
+                        <div class="song-list">
+                            <h4>Featured Songs:</h4>
+                            <ul>
+                                <li><i class="fas fa-music"></i> Perfect - Ed Sheeran</li>
+                                <li><i class="fas fa-music"></i> All of Me - John Legend</li>
+                                <li><i class="fas fa-music"></i> A Thousand Years - Christina Perri</li>
+                                <li><i class="fas fa-music"></i> Can't Help Falling in Love - Elvis Presley</li>
+                                <li><i class="fas fa-music"></i> Just the Way You Are - Bruno Mars</li>
+                                <li><i class="fas fa-music"></i> Thinking Out Loud - Ed Sheeran</li>
+                                <li><i class="fas fa-music"></i> You Are the Reason - Calum Scott</li>
+                                <li><i class="fas fa-music"></i> I Don't Want to Miss a Thing - Aerosmith</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="spotify-embed">
+                        <iframe src="https://open.spotify.com/embed/playlist/1fOi4AxqGheCHqowZn6ixa" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
                 </div>
             </div>
         </section>
@@ -981,14 +962,12 @@
         <section class="section friends-section" id="friends">
             <h1 class="section-title">Messages From Friends</h1>
             <div class="message-board">
-                <div class="pin"></div>
                 <h2 class="board-title">Happy Birthday!</h2>
                 <p class="board-subtitle">Your friends wanted to share their love for you</p>
                 
                 <div class="messages-grid">
                     <!-- Message from Luka -->
                     <div class="message-item">
-                        <div class="pin"></div>
                         <img src="luka.png" alt="Message from Luka" class="message-screenshot">
                         <div class="message-info">
                             <div class="message-from">Luka</div>
@@ -998,7 +977,6 @@
                     
                     <!-- Message from Dave -->
                     <div class="message-item">
-                        <div class="pin"></div>
                         <img src="dave.png" alt="Message from Dave" class="message-screenshot">
                         <div class="message-info">
                             <div class="message-from">Dave</div>
@@ -1008,7 +986,6 @@
                     
                     <!-- Message from 666rsi -->
                     <div class="message-item">
-                        <div class="pin"></div>
                         <img src="rsi2.png" alt="Message from 666rsi" class="message-screenshot">
                         <div class="message-info">
                             <div class="message-from">666rsi</div>
