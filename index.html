@@ -418,7 +418,7 @@
         }
 
         /* Friends Messages Section */
-        .friends-section {
+       .friends-section {
             background: linear-gradient(135deg, #f0f8ff 0%, #e6f0fa 100%);
             display: flex;
             flex-direction: column;
@@ -548,40 +548,6 @@
             background-color: #d1426f;
             border-radius: 50%;
         }
-
-        /* Navigation */
-        .page-nav {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 100;
-        }
-
-        .nav-link {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ff6b8b;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            background-color: #ff6b8b;
-            color: white;
-            transform: scale(1.1);
-        }
-
         /* Music Player Controls */
         .music-control {
             position: fixed;
@@ -831,43 +797,41 @@
                 <p class="board-subtitle">Your friends wanted to share their love for you</p>
                 
                 <div class="messages-grid">
-                    <!-- Message 1 -->
+                    <!-- Message from Luka -->
                     <div class="message-item">
                         <div class="pin"></div>
-                        <img src="https://via.placeholder.com/300x400/e75480/ffffff?text=Message+from+Sarah" alt="Message from Sarah" class="message-screenshot">
+                        <img src="luka.png" alt="Message from Luka" class="message-screenshot">
                         <div class="message-info">
-                            <div class="message-from">Sarah</div>
-                            <div class="message-preview">Happy birthday to the most amazing person I know! Can't wait to celebrate with you...</div>
+                            <div class="message-from">Luka</div>
+                            <div class="message-preview">Happy birthday on your 18th nephew. I hope you manage to get your ass out of a warzone safely...</div>
                         </div>
                     </div>
                     
-                    <!-- Message 2 -->
+                    <!-- Message from Dave -->
                     <div class="message-item">
                         <div class="pin"></div>
-                        <img src="https://via.placeholder.com/300x400/e75480/ffffff?text=Message+from+Mike" alt="Message from Mike" class="message-screenshot">
+                        <img src="dave.png" alt="Message from Dave" class="message-screenshot">
                         <div class="message-info">
-                            <div class="message-from">Mike</div>
-                            <div class="message-preview">Happy birthday bro! You're getting old but still looking young. Let's party soon!</div>
+                            <div class="message-from">Dave</div>
+                            <div class="message-preview">Hey sif when you're reading this I want you to know that despite knowing each other for not that long of a time...</div>
                         </div>
                     </div>
                     
-                    <!-- Message 3 -->
+                    <!-- Message from 666rsi -->
                     <div class="message-item">
                         <div class="pin"></div>
-                        <img src="https://via.placeholder.com/300x400/e75480/ffffff?text=Message+from+Emily" alt="Message from Emily" class="message-screenshot">
+                        <img src="rsi2.png" alt="Message from 666rsi" class="message-screenshot">
                         <div class="message-info">
-                            <div class="message-from">Emily</div>
-                            <div class="message-preview">To my favorite person on your special day! Wishing you all the happiness in the world...</div>
+                            <div class="message-from">666rsi</div>
+                            <div class="message-preview">And maybe happy birthday, what is he now? 18?</div>
                         </div>
                     </div>
                     
-                    <!-- Message 4 -->
-                    <div class="message-item">
-                        <div class="pin"></div>
-                        <img src="https://via.placeholder.com/300x400/e75480/ffffff?text=Message+from+Alex" alt="Message from Alex" class="message-screenshot">
-                        <div class="message-info">
-                            <div class="message-from">Alex</div>
-                            <div class="message-preview">Happy birthday! Remember that crazy trip we took last year? Let's do it again!</div>
+                    <!-- Empty slot for future messages -->
+                    <div class="message-item" style="background-color: #fff9fa; display: flex; justify-content: center; align-items: center;">
+                        <div style="text-align: center; padding: 20px;">
+                            <i class="fas fa-plus-circle" style="font-size: 2rem; color: #e75480; margin-bottom: 10px;"></i>
+                            <p style="color: #666;">More messages coming soon!</p>
                         </div>
                     </div>
                 </div>
