@@ -313,15 +313,51 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .playlist-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .playlist-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            color: #555;
+        }
+
+        .playlist-text h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #e75480;
+            margin-bottom: 20px;
+        }
+
+        .playlist-text p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
         }
 
         .spotify-embed {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            border-radius: 8px;
+            flex: 1;
+            min-width: 300px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transform: translateX(-50px);
+            position: relative;
+            z-index: 1;
         }
 
         .spotify-embed iframe {
@@ -330,135 +366,77 @@
             border: none;
         }
 
-        /* Movies Section */
-        /* Movie cards container */
-        .movie-cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 25px;
-            max-width: 900px;
-            margin: 30px auto 10px auto;
-            padding: 0 20px;
-        }
-
-        .movie-card {
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            color: #e75480;
-            font-weight: 600;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(231, 84, 128, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: #fff0f4;
-            overflow: hidden;
-        }
-
-        .movie-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(231, 84, 128, 0.5);
-        }
-
-        .movie-card img {
+        .floating-music {
+            position: absolute;
             width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-bottom: 3px solid #e75480;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
         }
 
-        .movie-title {
-            padding: 12px 10px;
-            text-align: center;
-            font-size: 1.1rem;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #fff5f5;
+        .music-note {
+            position: absolute;
+            color: rgba(231, 84, 128, 0.4);
+            animation: floatMusic linear infinite;
+            font-size: 1.5rem;
         }
 
-        /* Note below the cards */
-        .movies-section .note {
-            text-align: center;
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 20px;
-        }
-
-        /* Responsive tweaks */
-        @media (max-width: 480px) {
-            .movie-cards-container {
-                grid-template-columns: 1fr;
-                gap: 20px;
+        @keyframes floatMusic {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
             }
-
-            .movie-card {
-                font-size: 0.95rem;
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
             }
         }
 
-        .movies-section {
-            background-color: #fff9fa;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .netflix-embed {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .netflix-embed iframe {
-            width: 100%;
-            height: 280px;
-            border: none;
-        }
-
-        .note {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .movie-suggestions {
-            width: 100%;
-            max-width: 500px;
+        .song-list {
+            margin-top: 30px;
             background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin: 30px auto 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .movie-suggestions h3 {
+        .song-list h4 {
             color: #e75480;
             margin-bottom: 15px;
-            text-align: center;
             font-family: 'Montserrat', sans-serif;
         }
 
-        .movie-suggestions ul {
+        .song-list ul {
             list-style: none;
             padding: 0;
+            columns: 2;
+            column-gap: 30px;
         }
 
-        .movie-suggestions li {
-            padding: 10px 0;
+        .song-list li {
+            padding: 8px 0;
             border-bottom: 1px dashed #eee;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 0.95rem;
         }
 
-        .movie-suggestions li:last-child {
+        .song-list li:last-child {
             border-bottom: none;
         }
 
-        .movie-suggestions li i {
+        .song-list li i {
             color: #ff6b8b;
+            font-size: 0.8rem;
         }
 
         /* Friends Messages Section */
@@ -657,8 +635,17 @@
                 height: 300px;
             }
             
-            .netflix-embed iframe {
-                height: 200px;
+            .playlist-content {
+                flex-direction: column;
+            }
+            
+            .spotify-embed {
+                transform: none;
+                margin-top: 30px;
+            }
+            
+            .song-list ul {
+                columns: 1;
             }
 
             .messages-grid {
@@ -961,43 +948,33 @@
 
         <!-- Playlist Section -->
         <section class="section playlist-section" id="playlist">
-            <h1 class="section-title">Our Playlist</h1>
-            <div class="spotify-embed">
-                <iframe src="https://open.spotify.com/embed/playlist/1fOi4AxqGheCHqowZn6ixa" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <div class="floating-music">
+                <!-- Music notes will be added by JavaScript -->
             </div>
-        </section>
-
-        <!-- Movies Section -->
-        <section class="section movies-section" id="movies">
-            <h1 class="section-title">Movies to Watch</h1>
-
-            <div class="movie-cards-container">
-                <!-- Movie Card 1 -->
-                <a href="https://www.netflix.com/watch/550538" target="_blank" rel="noopener noreferrer" class="movie-card">
-                    <img src="https://occ-0-1432-1433.1.nflxso.net/art/85c7a/87bf37a146eb65b381d6b542327c73507e385c7a.jpg" alt="The Notebook Poster" />
-                    <div class="movie-title">The Notebook</div>
-                </a>
-
-                <!-- Movie Card 2 -->
-                <a href="https://www.netflix.com/watch/80095306" target="_blank" rel="noopener noreferrer" class="movie-card">
-                    <img src="https://m.media-amazon.com/images/I/71aJ0BTYNZL._AC_SY679_.jpg" alt="La La Land Poster" />
-                    <div class="movie-title">La La Land</div>
-                </a>
-
-                <!-- Movie Card 3 -->
-                <a href="https://www.netflix.com/watch/60011152" target="_blank" rel="noopener noreferrer" class="movie-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/d/db/Before_Sunrise_movie_poster.jpg" alt="Before Sunrise Poster" />
-                    <div class="movie-title">Before Sunrise</div>
-                </a>
-
-                <!-- Movie Card 4 -->
-                <a href="https://www.netflix.com/watch/70158204" target="_blank" rel="noopener noreferrer" class="movie-card">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/1/16/Eternal_Sunshine_of_the_Spotless_Mind_poster.jpg" alt="Eternal Sunshine Poster" />
-                    <div class="movie-title">Eternal Sunshine of the Spotless Mind</div>
-                </a>
+            <div class="playlist-content">
+                <div class="playlist-text">
+                    <h3>Our Love Playlist</h3>
+                    <p>Every song here reminds me of you - the way you laugh, the way you look at me, and all the little moments we've shared. Press play and let the music take you back to our most beautiful memories together.</p>
+                    <p>I've carefully selected each track to represent different aspects of our relationship - from our first conversations to the deep connection we share today.</p>
+                    
+                    <div class="song-list">
+                        <h4>Featured Songs:</h4>
+                        <ul>
+                            <li><i class="fas fa-music"></i> Perfect - Ed Sheeran</li>
+                            <li><i class="fas fa-music"></i> All of Me - John Legend</li>
+                            <li><i class="fas fa-music"></i> A Thousand Years - Christina Perri</li>
+                            <li><i class="fas fa-music"></i> Can't Help Falling in Love - Elvis Presley</li>
+                            <li><i class="fas fa-music"></i> Just the Way You Are - Bruno Mars</li>
+                            <li><i class="fas fa-music"></i> Thinking Out Loud - Ed Sheeran</li>
+                            <li><i class="fas fa-music"></i> You Are the Reason - Calum Scott</li>
+                            <li><i class="fas fa-music"></i> I Don't Want to Miss a Thing - Aerosmith</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="spotify-embed">
+                    <iframe src="https://open.spotify.com/embed/playlist/1fOi4AxqGheCHqowZn6ixa" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                </div>
             </div>
-
-            <p class="note">Note: You'll need to be logged into Netflix to view this content.</p>
         </section>
 
         <!-- Friends Messages Section -->
@@ -1056,7 +1033,6 @@
         <a href="#cover" class="nav-link active"><i class="fas fa-home"></i></a>
         <a href="#letters" class="nav-link"><i class="fas fa-envelope"></i></a>
         <a href="#playlist" class="nav-link"><i class="fas fa-music"></i></a>
-        <a href="#movies" class="nav-link"><i class="fas fa-film"></i></a>
         <a href="#friends" class="nav-link"><i class="fas fa-users"></i></a>
     </nav>
 
@@ -1083,6 +1059,30 @@
             }
             
             createHearts();
+
+            // Create floating music notes
+            function createMusicNotes() {
+                const musicContainer = document.querySelector('.floating-music');
+                const noteCount = 15;
+                const noteIcons = ['fa-music', 'fa-headphones', 'fa-play', 'fa-compact-disc'];
+                
+                for (let i = 0; i < noteCount; i++) {
+                    const note = document.createElement('div');
+                    note.classList.add('music-note');
+                    const randomIcon = noteIcons[Math.floor(Math.random() * noteIcons.length)];
+                    note.innerHTML = `<i class="fas ${randomIcon}"></i>`;
+                    
+                    // Random position and animation
+                    note.style.left = `${Math.random() * 100}%`;
+                    note.style.fontSize = `${20 + Math.random() * 30}px`;
+                    note.style.animationDuration = `${8 + Math.random() * 12}s`;
+                    note.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    musicContainer.appendChild(note);
+                }
+            }
+            
+            createMusicNotes();
             
             // Smooth scroll to next section when button is clicked
             const showMeBtn = document.querySelector('.show-me-btn');
