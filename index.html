@@ -615,10 +615,17 @@
         }
 
         /* Music Player Controls */
-        .music-control {
+        .music-control-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .music-control {
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -629,7 +636,6 @@
             align-items: center;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 100;
             transition: all 0.3s;
         }
 
@@ -644,26 +650,27 @@
 
         /* Volume control */
         .volume-container {
-            position: absolute;
-            right: 60px;
-            bottom: 0;
             background: white;
-            padding: 15px;
+            padding: 10px 15px;
             border-radius: 25px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: none;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            z-index: 101;
+            gap: 8px;
+            height: 30px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
         }
 
-        .music-control:hover .volume-container {
-            display: flex;
+        .music-control-container:hover .volume-container {
+            opacity: 1;
+            pointer-events: all;
         }
 
         .volume-slider {
             -webkit-appearance: none;
-            width: 100px;
+            width: 80px;
             height: 5px;
             border-radius: 5px;
             background: #ddd;
@@ -678,6 +685,12 @@
             border-radius: 50%;
             background: #e75480;
             cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            background: #d1426f;
+            transform: scale(1.1);
         }
 
         .volume-slider::-moz-range-thumb {
@@ -808,12 +821,14 @@
     </audio>
 
     <!-- Music control button with volume slider -->
-    <div class="music-control" id="musicControl">
-        <i class="fas fa-music"></i>
+    <div class="music-control-container">
         <div class="volume-container">
             <i class="fas fa-volume-down"></i>
             <input type="range" min="0" max="1" step="0.01" value="0.3" class="volume-slider" id="volumeSlider">
             <i class="fas fa-volume-up"></i>
+        </div>
+        <div class="music-control" id="musicControl">
+            <i class="fas fa-music"></i>
         </div>
     </div>
 
@@ -1336,66 +1351,58 @@
             const musicControl = document.getElementById('musicControl');
             const volumeSlider = document.getElementById('volumeSlider');
             let isPlaying = false;
-            
+
             // Set initial volume
-            bgMusic.volume = 0.3;
-            
-            // Volume control
+            bgMusic.volume = volumeSlider.value;
+
+            // Volume control - THIS IS THE FIX
             volumeSlider.addEventListener('input', function() {
                 bgMusic.volume = this.value;
+                
+                // Update volume icons based on volume level
+                const volumeDown = this.parentElement.querySelector('.fa-volume-down');
+                const volumeUp = this.parentElement.querySelector('.fa-volume-up');
+                
+                if (this.value == 0) {
+                    volumeDown.className = 'fas fa-volume-mute';
+                    volumeUp.className = 'fas fa-volume-mute';
+                } else if (this.value < 0.5) {
+                    volumeDown.className = 'fas fa-volume-down';
+                    volumeUp.className = 'fas fa-volume-down';
+                } else {
+                    volumeDown.className = 'fas fa-volume-up';
+                    volumeUp.className = 'fas fa-volume-up';
+                }
             });
-            
+
             // Try to autoplay (may be blocked by browser)
+            bgMusic.volume = 0.3; // Set initial volume
             const playPromise = bgMusic.play();
             
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
                     // Autoplay started
                     isPlaying = true;
-                    musicControl.innerHTML = '<i class="fas fa-pause"></i>' + musicControl.innerHTML;
+                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
                 })
                 .catch(error => {
                     // Autoplay was prevented
                     isPlaying = false;
-                    musicControl.innerHTML = '<i class="fas fa-music"></i>' + musicControl.innerHTML;
+                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
                 });
             }
             
             // Toggle play/pause on click
-            musicControl.addEventListener('click', function(e) {
-                // Don't toggle if clicking on volume slider
-                if (e.target === volumeSlider || e.target.closest('.volume-container')) {
-                    return;
-                }
-                
+            musicControl.addEventListener('click', function() {
                 if (isPlaying) {
                     bgMusic.pause();
-                    const icon = this.querySelector('i');
-                    if (icon) {
-                        icon.className = 'fas fa-music';
-                    }
+                    musicControl.innerHTML = '<i class="fas fa-music"></i>';
                 } else {
                     bgMusic.play();
-                    const icon = this.querySelector('i');
-                    if (icon) {
-                        icon.className = 'fas fa-pause';
-                    }
+                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
                 }
                 isPlaying = !isPlaying;
             });
-            
-            // Keep volume slider visible when hovering over it
-            const volumeContainer = document.querySelector('.volume-container');
-            if (volumeContainer) {
-                volumeContainer.addEventListener('mouseenter', function() {
-                    this.style.display = 'flex';
-                });
-                
-                volumeContainer.addEventListener('mouseleave', function() {
-                    if (!musicControl.matches(':hover')) {
-                        this.style.display = 'none';
-                    }
-                });
             }
         });
     </script>
