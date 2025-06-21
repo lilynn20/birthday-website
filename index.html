@@ -216,25 +216,24 @@
         }
 
         .envelopes-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            width: 100%;
-            max-width: 800px;
+            width: 90%;
+            max-width: 1000px;
             margin: 0 auto;
+            padding: 20px;
         }
 
         .envelope {
-            width: 100%;
-            max-width: 500px;
             position: relative;
             cursor: pointer;
+            height: 120px;
         }
 
         .envelope-front {
             background: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -244,6 +243,8 @@
             color: #e75480;
             transition: all 0.3s;
             border-left: 5px solid #ff6b8b;
+            height: 100%;
+            box-sizing: border-box;
         }
 
         .envelope-front i {
@@ -257,7 +258,7 @@
             left: 0;
             width: 100%;
             background-color: #fff9f2;
-            padding: 25px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transform: rotateX(90deg);
@@ -266,6 +267,9 @@
             z-index: 10;
             display: none;
             border-top: 5px solid #ff6b8b;
+            height: 100%;
+            box-sizing: border-box;
+            overflow-y: auto;
         }
 
         .letter.open {
@@ -278,16 +282,17 @@
         }
 
         .letter p {
-            margin: 15px 0;
+            margin: 10px 0;
             line-height: 1.6;
+            font-size: 0.9rem;
         }
 
         .letter button {
-            margin-top: 20px;
+            margin-top: 15px;
             background-color: #e75480;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
@@ -295,6 +300,7 @@
             align-items: center;
             gap: 8px;
             transition: background-color 0.3s;
+            font-size: 0.9rem;
         }
 
         .letter button:hover {
@@ -658,6 +664,11 @@
             .messages-grid {
                 grid-template-columns: 1fr;
             }
+
+            /* Responsive for letters grid */
+            .envelopes-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 480px) {
@@ -687,6 +698,15 @@
 
             .board-title {
                 font-size: 2rem;
+            }
+
+            /* Single column for letters on small screens */
+            .envelopes-container {
+                grid-template-columns: 1fr;
+            }
+
+            .envelope {
+                height: auto;
             }
         }
     </style>
@@ -727,220 +747,217 @@
 
         <!-- Letters Section -->
         <section class="section letters-section" id="letters">
-  <h1 class="section-title">Open When Letters</h1>
-  <div class="envelopes-container">
+            <h1 class="section-title">Open When Letters</h1>
+            <div class="envelopes-container">
+                <!-- Letter 1 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you miss me</span>
+                    </div>
+                    <div class="letter" id="letter1">
+                        <div class="letter-content">
+                            <p>My Dearest,</p>
+                            <p>I know we're apart right now, but please know that I'm thinking of you every moment. Remember when we laughed until our stomachs hurt? That's the joy you bring to my life.</p>
+                            <p>I miss you terribly, but this distance is temporary. Soon we'll be in each other's arms.</p>
+                            <p>All my love,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter1')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 1 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when you miss me</span>
-      </div>
-      <div class="letter" id="letter1">
-        <div class="letter-content">
-          <p>My Dearest,</p>
-          <p>I know we're apart right now, but please know that I'm thinking of you every moment. Remember when we laughed until our stomachs hurt? That's the joy you bring to my life.</p>
-          <p>I miss you terribly, but this distance is temporary. Soon we'll be in each other's arms.</p>
-          <p>All my love,</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter1')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
+                <!-- Letter 2 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you're sad</span>
+                    </div>
+                    <div class="letter" id="letter2">
+                        <div class="letter-content">
+                            <p>My Love,</p>
+                            <p>I wish I could be there to wipe away your tears. Whatever is making you sad will pass. Think of the time we'll finally meet. That day will come.</p>
+                            <p>You're stronger than you think.</p>
+                            <p>Forever yours,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter2')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 2 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when you're sad</span>
-      </div>
-      <div class="letter" id="letter2">
-        <div class="letter-content">
-          <p>My Love,</p>
-          <p>I wish I could be there to wipe away your tears. Whatever is making you sad will pass. Think of the time we’ll finally meet. That day will come.</p>
-          <p>You’re stronger than you think.</p>
-          <p>Forever yours,</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter2')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
+                <!-- Letter 3 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you can't sleep</span>
+                    </div>
+                    <div class="letter" id="letter3">
+                        <div class="letter-content">
+                            <p>Sweet Dreams,</p>
+                            <p>Can't sleep? Imagine I'm beside you, whispering silly stories and holding your hand. Let my love be your lullaby tonight.</p>
+                            <p>Goodnight, my love.</p>
+                            <p>Always,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter3')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 3 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when you can't sleep</span>
-      </div>
-      <div class="letter" id="letter3">
-        <div class="letter-content">
-          <p>Sweet Dreams,</p>
-          <p>Can't sleep? Imagine I’m beside you, whispering silly stories and holding your hand. Let my love be your lullaby tonight.</p>
-          <p>Goodnight, my love.</p>
-          <p>Always,</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter3')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
+                <!-- Letter 4 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you're happy</span>
+                    </div>
+                    <div class="letter" id="letter4">
+                        <div class="letter-content">
+                            <p>Hey You,</p>
+                            <p>You're smiling, and even though I can't see it, I feel it. One day, I'll get to witness that happiness in person. I can't wait.</p>
+                            <p>Smiling with you from afar,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter4')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 4 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when you're happy</span>
-      </div>
-      <div class="letter" id="letter4">
-        <div class="letter-content">
-          <p>Hey You,</p>
-          <p>You’re smiling, and even though I can't see it, I feel it. One day, I’ll get to witness that happiness in person. I can’t wait.</p>
-          <p>Smiling with you from afar,</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter4')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
+                <!-- Letter 5 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you're angry</span>
+                    </div>
+                    <div class="letter" id="letter5">
+                        <div class="letter-content">
+                            <p>My Love,</p>
+                            <p>It's okay to feel angry. Breathe, scream into your pillow, rant to me if you need. I may not be there physically, but I'm here to listen and care.</p>
+                            <p>Always,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter5')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 5 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when you're angry</span>
-      </div>
-      <div class="letter" id="letter5">
-        <div class="letter-content">
-          <p>My Love,</p>
-          <p>It's okay to feel angry. Breathe, scream into your pillow, rant to me if you need. I may not be there physically, but I’m here to listen and care.</p>
-          <p>Always,</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter5')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
+                <!-- Letter 6 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you're stressed</span>
+                    </div>
+                    <div class="letter" id="letter6">
+                        <div class="letter-content">
+                            <p>Hi Love,</p>
+                            <p>When things get overwhelming, remember you're not alone. I'm always just one message away. You're doing amazing, even when it doesn't feel like it.</p>
+                            <p>You've got this. And you've got me.</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter6')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 6 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when you're stressed</span>
-      </div>
-      <div class="letter" id="letter6">
-        <div class="letter-content">
-          <p>Hi Love,</p>
-          <p>When things get overwhelming, remember you’re not alone. I'm always just one message away. You're doing amazing, even when it doesn’t feel like it.</p>
-          <p>You’ve got this. And you’ve got me.</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter6')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
+                <!-- Letter 7 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you're sick</span>
+                    </div>
+                    <div class="letter" id="letter7">
+                        <div class="letter-content">
+                            <p>Oh no, Love,</p>
+                            <p>I hate that you're feeling unwell and I can't be there to help. Please rest and take care of yourself for both of us.</p>
+                            <p>Sending healing hugs,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter7')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 7 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when you're sick</span>
-      </div>
-      <div class="letter" id="letter7">
-        <div class="letter-content">
-          <p>Oh no, Love,</p>
-          <p>I hate that you're feeling unwell and I can’t be there to help. Please rest and take care of yourself for both of us.</p>
-          <p>Sending healing hugs,</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter7')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
+                <!-- Letter 8 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you feel lonely</span>
+                    </div>
+                    <div class="letter" id="letter8">
+                        <div class="letter-content">
+                            <p>Hey Love,</p>
+                            <p>The distance can feel cold sometimes, I know. But I'm just a message away. Imagine my hand holding yours, even through a screen.</p>
+                            <p>I'm with you, always.</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter8')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 8 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when you feel lonely</span>
-      </div>
-      <div class="letter" id="letter8">
-        <div class="letter-content">
-          <p>Hey Love,</p>
-          <p>The distance can feel cold sometimes, I know. But I'm just a message away. Imagine my hand holding yours, even through a screen.</p>
-          <p>I’m with you, always.</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter8')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
+                <!-- Letter 9 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when it's our anniversary</span>
+                    </div>
+                    <div class="letter" id="letter9">
+                        <div class="letter-content">
+                            <p>Happy Anniversary,</p>
+                            <p>We may not have met in person yet, but every moment together has meant everything. You make distance feel less lonely and love more real.</p>
+                            <p>Counting down to the day I finally see you,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter9')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 9 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when it's our anniversary</span>
-      </div>
-      <div class="letter" id="letter9">
-        <div class="letter-content">
-          <p>Happy Anniversary,</p>
-          <p>We may not have met in person yet, but every moment together has meant everything. You make distance feel less lonely and love more real.</p>
-          <p>Counting down to the day I finally see you,</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter9')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
+                <!-- Letter 10 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you're overthinking</span>
+                    </div>
+                    <div class="letter" id="letter10">
+                        <div class="letter-content">
+                            <p>Hey Babe,</p>
+                            <p>Your mind can be a storm sometimes. Just breathe. Not every thought needs a solution right now. You are doing your best and that's enough.</p>
+                            <p>I'm proud of you, always.</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter10')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 10 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when you're overthinking</span>
-      </div>
-      <div class="letter" id="letter10">
-        <div class="letter-content">
-          <p>Hey Babe,</p>
-          <p>Your mind can be a storm sometimes. Just breathe. Not every thought needs a solution right now. You are doing your best and that’s enough.</p>
-          <p>I’m proud of you, always.</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter10')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
+                <!-- Letter 11 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when it's your birthday</span>
+                    </div>
+                    <div class="letter" id="letter11">
+                        <div class="letter-content">
+                            <p>Happy Birthday, My Favorite Human!</p>
+                            <p>I may not be able to give you a real hug, but this message is a hug from my heart to yours. You deserve all the good things today and always.</p>
+                            <p>Wishing you love and light,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter11')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
 
-    <!-- Letter 11 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when it's your birthday</span>
-      </div>
-      <div class="letter" id="letter11">
-        <div class="letter-content">
-          <p>Happy Birthday, My Favorite Human!</p>
-          <p>I may not be able to give you a real hug, but this message is a hug from my heart to yours. You deserve all the good things today and always.</p>
-          <p>Wishing you love and light,</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter11')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
-
-    <!-- Letter 12 -->
-    <div class="envelope">
-      <div class="envelope-front">
-        <i class="fas fa-envelope-open-text"></i>
-        <span>Open when you need to know how much I love you</span>
-      </div>
-      <div class="letter" id="letter12">
-        <div class="letter-content">
-          <p>Hey You,</p>
-          <p>I love you in all the ways I haven’t even found words for yet. You are my favorite thought, my calm, my chaos, my hope.</p>
-          <p>No matter the miles, my heart is always with you.</p>
-          <p>Forever yours,</p>
-          <p>Me</p>
-        </div>
-        <button onclick="closeLetter('letter12')"><i class="fas fa-times"></i> Close</button>
-      </div>
-    </div>
-
-  </div>
-</section>
-
+                <!-- Letter 12 -->
+                <div class="envelope">
+                    <div class="envelope-front">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span>Open when you need to know how much I love you</span>
+                    </div>
+                    <div class="letter" id="letter12">
+                        <div class="letter-content">
+                            <p>Hey You,</p>
+                            <p>I love you in all the ways I haven't even found words for yet. You are my favorite thought, my calm, my chaos, my hope.</p>
+                            <p>No matter the miles, my heart is always with you.</p>
+                            <p>Forever yours,</p>
+                            <p>Me</p>
+                        </div>
+                        <button onclick="closeLetter('letter12')"><i class="fas fa-times"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Playlist Section -->
         <section class="section playlist-section" id="playlist">
