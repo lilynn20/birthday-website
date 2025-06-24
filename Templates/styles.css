@@ -1,0 +1,421 @@
+/* Reset and base */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff5f5;
+    color: #333;
+    
+    /* Make body scrollable and enable snap */
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    height: 100vh;
+}
+/* Modern, spacious cover section */
+.cover-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #fff0f3 0%, #ffd6de 100%);
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cover-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 70vh;
+    z-index: 2;
+}
+
+.birthday-message {
+    animation: fadeIn 1.5s ease-out;
+    margin-top: 10vh;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2 {
+    font-family: 'Dancing Script', cursive;
+    color: #e75480;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cover-section h1 {
+    font-size: 4.5rem;
+    margin-bottom: 0;
+}
+
+.cover-section h2 {
+    font-size: 3.5rem;
+    margin-top: 0;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-top: 25px;
+    color: #555;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.scroll-prompt {
+    margin-bottom: 10vh;
+    animation: fadeIn 1s ease-out 0.5s both;
+}
+
+.scroll-prompt p {
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.show-me-btn {
+    background-color: #e75480;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(231, 84, 128, 0.3);
+}
+
+.show-me-btn:hover {
+    background-color: #d1426f;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(231, 84, 128, 0.4);
+}
+
+.show-me-btn i {
+    transition: transform 0.3s ease;
+}
+
+.show-me-btn:hover i {
+    transform: translateY(3px);
+}
+
+/* Floating hearts */
+.floating-hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    color: rgba(231, 84, 128, 0.6);
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cover-section h1 {
+        font-size: 3.5rem;
+    }
+    
+    .cover-section h2 {
+        font-size: 2.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1.3rem;
+    }
+    
+    .show-me-btn {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cover-section h1 {
+        font-size: 2.8rem;
+    }
+    
+    .cover-section h2 {
+        font-size: 2.2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .scroll-prompt p {
+        font-size: 1rem;
+    }
+}
+.main-container {
+    width: 100%;
+    /* remove height and overflow here */
+}
+
+.section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px; /* more padding */
+    box-sizing: border-box;
+    scroll-snap-align: start;
+    position: relative;
+    gap: 20px; /* spacing between children */
+}
+
+/* Typography */
+h1, h2 {
+    font-family: 'Dancing Script', cursive;
+    color: #e75480;
+    margin: 0;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 2.8rem;
+}
+
+p {
+    max-width: 600px;
+    margin: 15px auto;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* Scroll hint */
+.scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    font-size: 1.2rem;
+    color: #e75480;
+    animation: bounce 2s infinite;
+}
+
+/* Envelopes container */
+.envelopes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+    gap: 25px;
+}
+
+.envelope {
+    width: 80%;
+    max-width: 450px;
+    margin: 0 auto;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.envelope-front {
+    background-color: #f8bbd0;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    color: #c2185b;
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.envelope:hover .envelope-front {
+    transform: translateY(-7px);
+}
+
+.letter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff9c4;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+    transform: rotateX(90deg);
+    transform-origin: top;
+    transition: transform 0.5s;
+    z-index: 10;
+    display: none;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.letter.open {
+    display: block;
+    transform: rotateX(0deg);
+}
+
+.letter p {
+    margin: 12px 0;
+    text-align: left;
+    max-width: 100%;
+}
+
+.letter button {
+    margin-top: 25px;
+    background-color: #c2185b;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+
+/* Spotify & Netflix embed */
+.spotify-embed, .netflix-embed {
+    margin: 40px auto;
+    width: fit-content;
+}
+
+.spotify-embed iframe, .netflix-embed iframe {
+    border-radius: 15px;
+}
+
+/* Movies suggestions */
+.movie-suggestions {
+    margin-top: 40px;
+    text-align: left;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.movie-suggestions h3 {
+    color: #e75480;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.movie-suggestions ul {
+    list-style-type: none;
+    padding-left: 24px;
+}
+
+.movie-suggestions li {
+    padding: 8px 0;
+    position: relative;
+    font-size: 1.1rem;
+}
+
+.movie-suggestions li:before {
+    content: "♥";
+    color: #e75480;
+    position: absolute;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Note under Netflix */
+.note {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 12px;
+}
+
+/* Navigation dots */
+.nav-dots {
+    position: fixed;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.nav-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: rgba(231, 84, 128, 0.5);
+    margin: 10px 0;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.nav-dot:hover, .nav-dot.active {
+    background-color: #e75480;
+    transform: scale(1.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+    
+    h2 {
+        font-size: 2.2rem;
+    }
+    
+    .envelope {
+        width: 90%;
+    }
+
+    .letter {
+        font-size: 0.95rem;
+        padding: 20px;
+    }
+
+    .letter button {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+
+    .nav-dots {
+        right: 15px;
+    }
+}
