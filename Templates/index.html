@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,7 +54,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url("media/kazuya side pic.png");
+        {% static
+        background-image: url("{% static kazuya side pic.png" %});
         background-size: auto 100%;
         background-position: right center;
         background-repeat: no-repeat;
@@ -257,7 +259,7 @@
         left: 0;
         width: 100%;
         height: 70vh;
-        background-image: url("media/kazuya 2nd pic.png");
+        background-image: url("kazuya 2nd pic.png");
         background-size: auto 100%;
         background-position: left bottom;
         background-repeat: no-repeat;
