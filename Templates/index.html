@@ -54,8 +54,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        {% static
-        background-image: url("{% static kazuya side pic.png" %});
+        background-image: url("{% static 'kazuya side pic.png' %}");
         background-size: auto 100%;
         background-position: right center;
         background-repeat: no-repeat;
@@ -259,7 +258,7 @@
         left: 0;
         width: 100%;
         height: 70vh;
-        background-image: url("kazuya 2nd pic.png");
+        background-image: url("{% static 'kazuya_side_pic.png' %}");
         background-size: auto 100%;
         background-position: left bottom;
         background-repeat: no-repeat;
@@ -274,7 +273,7 @@
         right: 0;
         width: 100%;
         height: 50vh;
-        background-image: url("media/virgil 3.png");
+        background-image: url("{% static 'media/virgil 3.png' %} ");
         background-size: auto 100%;
         background-position: right top;
         background-repeat: no-repeat;
@@ -430,7 +429,7 @@
         position: relative;
         overflow: hidden;
         padding: 60px 20px;
-        background-image: url("media/virgil 4.png");
+        background-image: url("{% static 'media/virgil 4.png' %}");
         background-size: cover;
         background-attachment: fixed;
       }
@@ -442,7 +441,7 @@
         left: 0;
         width: 100%;
         height: 70vh;
-        background-image: url("media/dante 1.png");
+        background-image: url("{% static 'media/dante 1.png' %}");
         background-size: auto 100%;
         background-position: left bottom;
         background-repeat: no-repeat;
@@ -457,7 +456,7 @@
         right: 0;
         width: 100%;
         height: 50vh;
-        background-image: url("media/virgil 1.png");
+        background-image: url("{% static 'media/virgil 1.png' %}");
         background-size: auto 100%;
         background-position: right bottom;
         background-repeat: no-repeat;
@@ -617,7 +616,7 @@
         left: 0;
         width: 100%;
         height: 70vh;
-        background-image: url("media/sparda.png");
+        background-image: url("{% static 'media/sparda.png' %}");
         background-size: auto 100%;
         background-position: left bottom;
         background-repeat: no-repeat;
@@ -632,7 +631,7 @@
         right: 0;
         width: 100%;
         height: 50vh;
-        background-image: url("media/kazuya white.png");
+        background-image: url("{% static 'media/kazuya white.png' %}");
         background-size: auto 80%;
         background-position: right bottom;
         background-repeat: no-repeat;
@@ -1059,7 +1058,6 @@
     </style>
   </head>
   <body>
-    <!-- Hidden audio element for background music -->
     <audio id="bgMusic" loop>
       <source
         src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
