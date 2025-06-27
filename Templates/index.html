@@ -273,7 +273,7 @@
         right: 0;
         width: 100%;
         height: 50vh;
-        background-image: url("{% static 'media/virgil 3.png' %} ");
+        background-image: url("{% static 'virgil 3.png' %} ");
         background-size: auto 100%;
         background-position: right top;
         background-repeat: no-repeat;
@@ -429,7 +429,7 @@
         position: relative;
         overflow: hidden;
         padding: 60px 20px;
-        background-image: url("{% static 'media/virgil 4.png' %}");
+        background-image: url("{% static 'virgil 4.png' %}");
         background-size: cover;
         background-attachment: fixed;
       }
@@ -441,7 +441,7 @@
         left: 0;
         width: 100%;
         height: 70vh;
-        background-image: url("{% static 'media/dante 1.png' %}");
+        background-image: url("{% static 'dante 1.png' %}");
         background-size: auto 100%;
         background-position: left bottom;
         background-repeat: no-repeat;
@@ -456,7 +456,7 @@
         right: 0;
         width: 100%;
         height: 50vh;
-        background-image: url("{% static 'media/virgil 1.png' %}");
+        background-image: url("{% static 'virgil 1.png' %}");
         background-size: auto 100%;
         background-position: right bottom;
         background-repeat: no-repeat;
@@ -616,7 +616,7 @@
         left: 0;
         width: 100%;
         height: 70vh;
-        background-image: url("{% static 'media/sparda.png' %}");
+        background-image: url("{% static 'sparda.png' %}");
         background-size: auto 100%;
         background-position: left bottom;
         background-repeat: no-repeat;
@@ -631,7 +631,7 @@
         right: 0;
         width: 100%;
         height: 50vh;
-        background-image: url("{% static 'media/kazuya white.png' %}");
+        background-image: url("{% static 'kazuya white.png' %}");
         background-size: auto 80%;
         background-position: right bottom;
         background-repeat: no-repeat;
@@ -1885,7 +1885,7 @@
         content.append("senderName", senderName);
         content.append("messageText", messageText);
         content.append("messageImage", messageImage);
-        const sender = await fetch("http://127.0.0.1:8000/add/", {
+        const sender = await fetch("https://xpanda.pythonanywhere.com/add/", {
           method: "POST",
           headers: {
             "X-CSRFToken": csrftoken,
@@ -1897,7 +1897,7 @@
       });
 
       async function getdata() {
-        const response = await fetch("http://127.0.0.1:8000/getitems/");
+        const response = await fetch("https://xpanda.pythonanywhere.com/getitems/");
         const data = await response.json();
         const content = document.getElementById("contents");
 
