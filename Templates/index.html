@@ -1919,7 +1919,7 @@
         content.append("senderName", senderName);
         content.append("messageText", messageText);
         content.append("messageImage", messageImage);
-        const sender = await fetch("http://127.0.0.1:8000/add/", {
+        const sender = await fetch("/add/", {
           method: "POST",
           headers: {
             "X-CSRFToken": csrftoken,
@@ -1931,7 +1931,7 @@
       });
 
       async function getdata() {
-        const response = await fetch("http://127.0.0.1:8000/getitems/");
+        const response = await fetch("/getitems/");
         const data = await response.json();
         const content = document.getElementById("contents");
 
