@@ -2017,5 +2017,20 @@
         modal.style.display = "flex";
       }
     </script>
+    {% for card in cards %}
+    <div class="card">
+      <h3>{{ card.name }}</h3>
+      <p>{{ card.msg }}</p>
+      {% if card.pic %}
+      <img
+        src="{{ card.pic.url }}"
+        alt="Image for {{ card.name }}"
+        width="200"
+      />
+      {% endif %}
+    </div>
+    {% empty %}
+    <p>No cards found.</p>
+    {% endfor %}
   </body>
 </html>

@@ -25,7 +25,7 @@ def getitems(request):
     for obj in objs
     ]
     return JsonResponse(data, safe=False)
-
+from .models import Cards
 def home(request):
     context = {}
     return render(request , 'index.html',context )
