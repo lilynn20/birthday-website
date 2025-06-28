@@ -677,6 +677,7 @@
       }
 
       .message-item {
+        cursor: pointer;
         transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         transform-origin: center;
         overflow: hidden;
@@ -756,11 +757,13 @@
       }
 
       .message-modal-image {
-        width: 100%;
-        max-height: 50vh;
-        object-fit: contain;
-        border-bottom: 1px solid #2a2a3e;
-      }
+    width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+    border-bottom: 1px solid #2a2a3e;
+}
 
       .message-modal-text {
         padding: 25px;
@@ -1740,12 +1743,11 @@
       });
     </script>
 
-    <!-- Message Modal -->
-    <div class="message-modal" id="messageModal">
-      <div class="message-modal-content">
+<div class="message-modal" id="messageModal">
+    <div class="message-modal-content">
         <div class="message-modal-header">
-          <h3 class="message-modal-from" id="modalFrom">From:</h3>
-          <span class="close-message-modal">&times;</span>
+            <h3 class="message-modal-from" id="modalFrom">From:</h3>
+            <span class="close-message-modal">&times;</span>
         </div>
         <img
           src=""
@@ -1754,8 +1756,8 @@
           id="modalImage"
         />
         <div class="message-modal-text" id="modalText"></div>
-      </div>
     </div>
+</div>
 
     <!-- Message Form Modal -->
     <div
@@ -1886,7 +1888,7 @@
         content.append("senderName", senderName);
         content.append("messageText", messageText);
         content.append("messageImage", messageImage);
-        const sender = await fetch("https://xpanda.pythonanywhere.com/add/", {
+        const sender = await fetch("http://127.0.0.1:8000/add/", {
           method: "POST",
           headers: {
             "X-CSRFToken": csrftoken,
@@ -1898,57 +1900,57 @@
       });
 
       async function getdata() {
-        const response = await fetch("https://xpanda.pythonanywhere.com/getitems/");
-        const data = await response.json();
-        const content = document.getElementById("contents");
+    const response = await fetch("http://127.0.0.1:8000/getitems/");
+    const data = await response.json();
+    const content = document.getElementById("contents");
 
-        content.innerHTML = "";
-        const l = document.createElement("div");
-        l.innerHTML = `              <div
-                onclick="opens()"
-                id="opener"
-                class="message-item"
-                style="
-                  background-color: #1a1a1a;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  border: 1px solid #333;
-                "
-                id="leaveMessage"
-              >
-                <div style="text-align: center; padding: 20px">
-                  <i
-                    class="fas fa-plus-circle"
-                    style="font-size: 2rem; color: #c1121f; margin-bottom: 10px"
-                  ></i>
-                  <p style="color: #aaa">Leave a message for Sif!</p>
-                </div>
-              </div>`;
+    content.innerHTML = "";
+    const l = document.createElement("div");
+    l.innerHTML = `              <div
+            onclick="opens()"
+            id="opener"
+            class="message-item"
+            style="
+              background-color: #1a1a1a;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border: 1px solid #333;
+            "
+            id="leaveMessage"
+          >
+            <div style="text-align: center; padding: 20px">
+              <i
+                class="fas fa-plus-circle"
+                style="font-size: 2rem; color: #c1121f; margin-bottom: 10px"
+              ></i>
+              <p style="color: #aaa">Leave a message for Sif!</p>
+            </div>
+          </div>`;
 
-        if (Array.isArray(data)) {
-          data.forEach((card) => {
+    if (Array.isArray(data)) {
+        data.forEach((card) => {
             const cardHTML = `
-                      <div class="message-item">
-                      <img src="${card.pic}" alt="Image from ${card.name}" class="message-screenshot" />
-                      <div class="message-info">
-                          <div class="message-from">${card.name}</div>
-                          <div class="message-preview">${card.msg}</div>
-                      </div>
-                      </div>
-                  `;
+                <div class="message-item" onclick="openMessageModal('${card.name}', '${card.msg}', '${card.pic}')">
+                    <img src="${card.pic}" alt="Image from ${card.name}" class="message-screenshot" />
+                    <div class="message-info">
+                        <div class="message-from">${card.name}</div>
+                        <div class="message-preview">${card.msg}</div>
+                    </div>
+                </div>
+            `;
 
             const wrapper = document.createElement("div");
             wrapper.innerHTML = cardHTML;
             content.appendChild(wrapper.firstElementChild);
-          });
-        } else {
-          content.innerHTML = `<p>${data.error || "No data available"}</p>`;
-        }
+        });
+    } else {
+        content.innerHTML = `<p>${data.error || "No data available"}</p>`;
+    }
 
-        content.appendChild(l);
-        console.log(data);
-      }
+    content.appendChild(l);
+    console.log(data);
+}
       getdata();
       function opens() {
         let form_class = form.classList;
@@ -1971,6 +1973,18 @@
           form.classList.add("hidden");
         }
       }
+      function openMessageModal(from, message, imageUrl) {
+    const modal = document.getElementById('messageModal');
+    const modalFrom = document.getElementById('modalFrom');
+    const modalText = document.getElementById('modalText');
+    const modalImage = document.getElementById('modalImage');
+    
+    modalFrom.textContent = from;
+    modalText.textContent = message;
+    modalImage.src = imageUrl;
+    
+    modal.style.display = 'flex';
+}
     </script>
   </body>
 </html>
