@@ -677,12 +677,11 @@
       }
 
       .message-item {
-        cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        transform-origin: center;
-        overflow: hidden;
-        position: relative;
-      }
+    cursor: pointer;
+    height: 100%; /* Ensure consistent height */
+    display: flex;
+    flex-direction: column;
+}
 
       .message-item:hover {
         transform: scale(1.08);
@@ -695,23 +694,19 @@
       }
 
       .message-screenshot {
-        transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        width: 100%;
-        height: 100px;
-        display: block;
-        object-fit: cover;
-      }
+    height: 150px; /* Fixed height for images */
+    object-fit: cover; /* Ensure images maintain aspect ratio */
+    width: 100%;
+}
 
       .message-item:hover .message-screenshot {
         transform: scale(1.15);
       }
 
       .message-info {
-        transition: all 0.4s ease;
-        background-color: rgba(26, 26, 46, 0.85) !important;
-        position: relative;
-        z-index: 2;
-      }
+    flex-grow: 1; /* Allow info section to take remaining space */
+    padding: 15px;
+}
 
       .message-item:hover .message-info {
         background-color: rgba(50, 50, 80, 0.95) !important;
@@ -1931,57 +1926,61 @@
       });
 
       async function getdata() {
-        const response = await fetch("/getitems/");
-        const data = await response.json();
-        const content = document.getElementById("contents");
+    const response = await fetch("/getitems/");
+    const data = await response.json();
+    const content = document.getElementById("contents");
 
-        content.innerHTML = "";
-        const l = document.createElement("div");
-        l.innerHTML = `              <div
-            onclick="opens()"
-            id="opener"
-            class="message-item"
-            style="
-              background-color: #1a1a1a;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border: 1px solid #333;
-            "
-            id="leaveMessage"
-          >
+    content.innerHTML = "";
+    const l = document.createElement("div");
+    l.innerHTML = `              
+        <div onclick="opens()" class="message-item" style="
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #333;
+            cursor: pointer;
+            height: 100%;
+        ">
             <div style="text-align: center; padding: 20px">
-              <i
-                class="fas fa-plus-circle"
-                style="font-size: 2rem; color: #c1121f; margin-bottom: 10px"
-              ></i>
-              <p style="color: #aaa">Leave a message for Sif!</p>
+                <i class="fas fa-plus-circle" style="font-size: 2rem; color: #c1121f; margin-bottom: 10px"></i>
+                <p style="color: #aaa">Leave a message for Sif!</p>
             </div>
-          </div>`;
+        </div>`;
 
-        if (Array.isArray(data)) {
-          data.forEach((card) => {
+    if (Array.isArray(data)) {
+        data.forEach((card) => {
             const cardHTML = `
-                <div class="message-item" onclick="openMessageModal('${card.name}', '${card.msg}', '${card.pic}')">
-                    <img src="${card.pic}" alt="Image from ${card.name}" class="message-screenshot" />
+                <div class="message-item" onclick="openMessageModal('${escapeHtml(card.name)}', '${escapeHtml(card.msg)}', '${card.pic}')">
+                    <img src="${card.pic}" alt="Image from ${escapeHtml(card.name)}" class="message-screenshot" />
                     <div class="message-info">
-                        <div class="message-from">${card.name}</div>
-                        <div class="message-preview">${card.msg}</div>
+                        <div class="message-from">${escapeHtml(card.name)}</div>
+                        <div class="message-preview">${escapeHtml(card.msg)}</div>
                     </div>
                 </div>
             `;
 
-            const wrapper = document.createElement("div");
+            const wrapper = document.createElement('div');
             wrapper.innerHTML = cardHTML;
             content.appendChild(wrapper.firstElementChild);
-          });
-        } else {
-          content.innerHTML = `<p>${data.error || "No data available"}</p>`;
-        }
+        });
+    } else {
+        content.innerHTML = `<p>${data.error || "No data available"}</p>`;
+    }
 
-        content.appendChild(l);
-        console.log(data);
-      }
+    content.appendChild(l.firstElementChild);
+}
+
+// Helper function to escape HTML special characters
+function escapeHtml(unsafe) {
+    if (!unsafe) return '';
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
       getdata();
       function opens() {
         let form_class = form.classList;
@@ -2005,17 +2004,25 @@
         }
       }
       function openMessageModal(from, message, imageUrl) {
-        const modal = document.getElementById("messageModal");
-        const modalFrom = document.getElementById("modalFrom");
-        const modalText = document.getElementById("modalText");
-        const modalImage = document.getElementById("modalImage");
+    const modal = document.getElementById("messageModal");
+    const modalFrom = document.getElementById("modalFrom");
+    const modalText = document.getElementById("modalText");
+    const modalImage = document.getElementById("modalImage");
 
-        modalFrom.textContent = from;
-        modalText.textContent = message;
+    modalFrom.textContent = "From: " + from;
+    modalText.textContent = message;
+    
+    // Set image source and handle cases where image might not exist
+    if (imageUrl && imageUrl.trim() !== "") {
         modalImage.src = imageUrl;
+        modalImage.style.display = "block";
+    } else {
+        modalImage.style.display = "none";
+    }
 
-        modal.style.display = "flex";
-      }
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+}
     </script>
     {% for card in cards %}
     <div class="card">
