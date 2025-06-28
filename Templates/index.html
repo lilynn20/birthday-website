@@ -757,13 +757,13 @@
       }
 
       .message-modal-image {
-    width: 100%;
-    max-height: 60vh;
-    object-fit: contain;
-    margin: 0 auto;
-    display: block;
-    border-bottom: 1px solid #2a2a3e;
-}
+        width: 100%;
+        max-height: 60vh;
+        object-fit: contain;
+        margin: 0 auto;
+        display: block;
+        border-bottom: 1px solid #2a2a3e;
+      }
 
       .message-modal-text {
         padding: 25px;
@@ -1465,12 +1465,41 @@
       </section>
     </div>
 
+    <section
+      id="signature"
+      class="section"
+      style="background-color: #0a0a12; text-align: center; padding: 40px 20px"
+    >
+      <div style="max-width: 800px; margin: 0 auto">
+        <img
+          src="{% static 'design sans titre(1)' %}"
+          alt="Fabio and Dave"
+          style="
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(125, 95, 255, 0.3);
+          "
+        />
+        <p
+          style="
+            color: #7d5fff;
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 20px;
+            font-size: 1.2rem;
+          "
+        >
+          Fabio & Dave - Unc iRA
+        </p>
+      </div>
+    </section>
     <!-- Navigation -->
     <nav class="page-nav">
       <a href="#cover" class="nav-link active"><i class="fas fa-home"></i></a>
       <a href="#letters" class="nav-link"><i class="fas fa-envelope"></i></a>
       <a href="#playlist" class="nav-link"><i class="fas fa-music"></i></a>
       <a href="#friends" class="nav-link"><i class="fas fa-users"></i></a>
+      <a href="#signature" class="nav-link"><i class="fas fa-signature"></i></a>
     </nav>
 
     <script>
@@ -1743,11 +1772,11 @@
       });
     </script>
 
-<div class="message-modal" id="messageModal">
-    <div class="message-modal-content">
+    <div class="message-modal" id="messageModal">
+      <div class="message-modal-content">
         <div class="message-modal-header">
-            <h3 class="message-modal-from" id="modalFrom">From:</h3>
-            <span class="close-message-modal">&times;</span>
+          <h3 class="message-modal-from" id="modalFrom">From:</h3>
+          <span class="close-message-modal">&times;</span>
         </div>
         <img
           src=""
@@ -1756,8 +1785,8 @@
           id="modalImage"
         />
         <div class="message-modal-text" id="modalText"></div>
+      </div>
     </div>
-</div>
 
     <!-- Message Form Modal -->
     <div
@@ -1900,13 +1929,13 @@
       });
 
       async function getdata() {
-    const response = await fetch("http://127.0.0.1:8000/getitems/");
-    const data = await response.json();
-    const content = document.getElementById("contents");
+        const response = await fetch("http://127.0.0.1:8000/getitems/");
+        const data = await response.json();
+        const content = document.getElementById("contents");
 
-    content.innerHTML = "";
-    const l = document.createElement("div");
-    l.innerHTML = `              <div
+        content.innerHTML = "";
+        const l = document.createElement("div");
+        l.innerHTML = `              <div
             onclick="opens()"
             id="opener"
             class="message-item"
@@ -1928,8 +1957,8 @@
             </div>
           </div>`;
 
-    if (Array.isArray(data)) {
-        data.forEach((card) => {
+        if (Array.isArray(data)) {
+          data.forEach((card) => {
             const cardHTML = `
                 <div class="message-item" onclick="openMessageModal('${card.name}', '${card.msg}', '${card.pic}')">
                     <img src="${card.pic}" alt="Image from ${card.name}" class="message-screenshot" />
@@ -1943,14 +1972,14 @@
             const wrapper = document.createElement("div");
             wrapper.innerHTML = cardHTML;
             content.appendChild(wrapper.firstElementChild);
-        });
-    } else {
-        content.innerHTML = `<p>${data.error || "No data available"}</p>`;
-    }
+          });
+        } else {
+          content.innerHTML = `<p>${data.error || "No data available"}</p>`;
+        }
 
-    content.appendChild(l);
-    console.log(data);
-}
+        content.appendChild(l);
+        console.log(data);
+      }
       getdata();
       function opens() {
         let form_class = form.classList;
@@ -1974,17 +2003,17 @@
         }
       }
       function openMessageModal(from, message, imageUrl) {
-    const modal = document.getElementById('messageModal');
-    const modalFrom = document.getElementById('modalFrom');
-    const modalText = document.getElementById('modalText');
-    const modalImage = document.getElementById('modalImage');
-    
-    modalFrom.textContent = from;
-    modalText.textContent = message;
-    modalImage.src = imageUrl;
-    
-    modal.style.display = 'flex';
-}
+        const modal = document.getElementById("messageModal");
+        const modalFrom = document.getElementById("modalFrom");
+        const modalText = document.getElementById("modalText");
+        const modalImage = document.getElementById("modalImage");
+
+        modalFrom.textContent = from;
+        modalText.textContent = message;
+        modalImage.src = imageUrl;
+
+        modal.style.display = "flex";
+      }
     </script>
   </body>
 </html>
