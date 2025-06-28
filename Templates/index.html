@@ -1523,7 +1523,22 @@
             energyContainer.appendChild(energy);
           }
         }
+document.addEventListener('click', function(e) {
+        const modal = document.getElementById("messageModal");
+        if (e.target === modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    });
 
+    const closeModalBtn = document.querySelector(".close-message-modal");
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', function() {
+            const modal = document.getElementById("messageModal");
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        });
+    }
         createEnergy();
 
         // Create floating music notes
@@ -1951,7 +1966,9 @@
     if (Array.isArray(data)) {
         data.forEach((card) => {
             const cardHTML = `
-                <div class="message-item" onclick="openMessageModal('${escapeHtml(card.name)}', '${escapeHtml(card.msg)}', '${card.pic}')">
+                <div class="message-item" data-name="${escapeHtml(card.name)}" 
+                     data-message="${escapeHtml(card.msg)}" 
+                     data-image="${card.pic}">
                     <img src="${card.pic}" alt="Image from ${escapeHtml(card.name)}" class="message-screenshot" />
                     <div class="message-info">
                         <div class="message-from">${escapeHtml(card.name)}</div>
@@ -1962,7 +1979,18 @@
 
             const wrapper = document.createElement('div');
             wrapper.innerHTML = cardHTML;
-            content.appendChild(wrapper.firstElementChild);
+            const messageItem = wrapper.firstElementChild;
+            
+            // Add click event listener directly
+            messageItem.addEventListener('click', function() {
+                openMessageModal(
+                    this.getAttribute('data-name'),
+                    this.getAttribute('data-message'),
+                    this.getAttribute('data-image')
+                );
+            });
+            
+            content.appendChild(messageItem);
         });
     } else {
         content.innerHTML = `<p>${data.error || "No data available"}</p>`;
@@ -1970,7 +1998,6 @@
 
     content.appendChild(l.firstElementChild);
 }
-
 // Helper function to escape HTML special characters
 function escapeHtml(unsafe) {
     if (!unsafe) return '';
@@ -2009,6 +2036,11 @@ function escapeHtml(unsafe) {
     const modalText = document.getElementById("modalText");
     const modalImage = document.getElementById("modalImage");
 
+    if (!modal || !modalFrom || !modalText || !modalImage) {
+        console.error("Modal elements not found");
+        return;
+    }
+
     modalFrom.textContent = "From: " + from;
     modalText.textContent = message;
     
@@ -2021,7 +2053,7 @@ function escapeHtml(unsafe) {
     }
 
     modal.style.display = "flex";
-    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+    document.body.style.overflow = "hidden";
 }
     </script>
     {% for card in cards %}
